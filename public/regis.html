@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
+    <title>ConVivir - Registro</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="shortcut icon" href="./img/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="login-container" >
+        <div class="login-header">
+            <img src="./img/LOGO.png" alt="Logo ConVivir" class="logo">
+            <h1>ConVivir</h1>
+            <p>Sistema de Gestión de Residentes</p>
+        </div>
+        
+        <form class="login-form" id="loginForm" method="post">
+            <div class="form-group">
+                <label for="name">
+                    <i class="fas fa-user"></i> 
+                    Nombre y Apellido
+                </label>
+                <input type="text" id="name" placeholder="Ingrese su Nombre y Apellido" >
+            </div>
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> 
+                    Usuario
+                </label>
+                <input type="text" id="user" placeholder="Ingrese su Usuario" >
+            </div>
+            
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> 
+                    Contraseña
+                </label>
+                <input type="password" id="pass" placeholder="Ingrese su contraseña">
+                <button type="button" class="toggle-password" onclick="togglePassword('clave')"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="form-group">
+                <label for="email">
+                    <i class="fa fa-email"></i>
+                    Correo electronico
+                </label>
+                <input type="email" id="email" placeholder="Ingrese su correo electronico">
+            </div>
+            <div class="form-group">
+                <label for="telefono">
+                    <i class="fa fa-email"></i>
+                    Telefono
+                </label>
+                <input type="text" id="telefono" placeholder="Ingrese su numero de telefono">
+            </div>
+            <div class="form-group">
+                <label for="cedula">
+                    <i class="fa fa-email"></i>
+                    Cedula de Identidad
+                </label>
+                <input type="text" id="cedula" placeholder="Ingrese su cedula de identidad">
+            </div>
+            <div class="form-group">
+                <label for="edificio">
+                    <i class="fa fa-email"></i>
+                    Edificio
+                </label>
+                <input type="text" id="edificio" placeholder="Ingrese su edificio">
+            </div>
+            <div class="form-group">
+                <label for="apartamento">
+                    <i class="fa fa-email"></i>
+                    Apartamento
+                </label>
+                <input type="text" id="apartamento" placeholder="Ingrese su apartamento">
+            </div>
+            <div class="form-group">
+                <label for="cargo">
+                    <i class="fa fa-email"></i>
+                    Cargo
+                </label>
+                <select name="cargo" id="cargo" disabled>
+                    <option value="2">Residente</option>
+                </select>
+            </div>
+            <button type="submit" class="register-btn" id="regis">Registrarse</button>
+            <div class="auth-footer">
+                <p><a href="/">← Volver al inicio</a></p>
+            </div>
+        </form>
+        <div class="login-footer">
+            <p><i class="fas fa-phone-alt"></i> Soporte: 04145553322</p>
+            <p><i class="far fa-copyright"></i> 2023 Sistema de Gestión Condominial</p>
+        </div>
+    </div>
+
+    <div id="loading" class="loading hidden">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/conxion.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
