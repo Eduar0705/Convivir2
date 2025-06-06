@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Registro</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/registro.css">
     <link rel="shortcut icon" href="./img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -17,20 +17,20 @@
             <p>Sistema de Gestión de Residentes</p>
         </div>
         
-        <form class="login-form" id="loginForm" method="post">
+        <form class="login-form" id="loginForm" method="post" action="regUsuario" autocomplete="off">
             <div class="form-group">
                 <label for="name">
                     <i class="fas fa-user"></i> 
                     Nombre y Apellido
                 </label>
-                <input type="text" id="name" placeholder="Ingrese su Nombre y Apellido" >
+                <input type="text" id="name" name="name" placeholder="Ingrese su Nombre y Apellido" >
             </div>
             <div class="form-group">
                 <label for="username">
                     <i class="fas fa-user"></i> 
                     Usuario
                 </label>
-                <input type="text" id="user" placeholder="Ingrese su Usuario" >
+                <input type="text" id="user" name="user" placeholder="Ingrese su Usuario" >
             </div>
             
             <div class="form-group">
@@ -38,53 +38,50 @@
                     <i class="fas fa-lock"></i> 
                     Contraseña
                 </label>
-                <input type="password" id="pass" placeholder="Ingrese su contraseña">
+                <input type="password" id="pass" name="pass" placeholder="Ingrese su contraseña">
                 <button type="button" class="toggle-password" onclick="togglePassword('clave')"><i class="fas fa-eye"></i></button>
             </div>
             <div class="form-group">
                 <label for="email">
-                    <i class="fa fa-email"></i>
+                    <i class="fas fa-envelope"></i>
                     Correo electronico
                 </label>
-                <input type="email" id="email" placeholder="Ingrese su correo electronico">
+                <input type="email" id="email" name="email" placeholder="Ingrese su correo electronico">
             </div>
             <div class="form-group">
                 <label for="telefono">
-                    <i class="fa fa-email"></i>
+                    <i class="fas fa-phone"></i>
                     Telefono
                 </label>
-                <input type="text" id="telefono" placeholder="Ingrese su numero de telefono">
+                <input type="text" id="telefono" name="telefono" placeholder="Ingrese su numero de telefono">
             </div>
             <div class="form-group">
                 <label for="cedula">
-                    <i class="fa fa-email"></i>
+                    <i class="far fa-id-card"></i>
                     Cedula de Identidad
                 </label>
-                <input type="text" id="cedula" placeholder="Ingrese su cedula de identidad">
+                <input type="text" id="cedula" name="cedula" placeholder="Ingrese su cedula de identidad">
             </div>
             <div class="form-group">
                 <label for="edificio">
-                    <i class="fa fa-email"></i>
+                    <i class="fas fa-building"></i>
                     Edificio
                 </label>
-                <input type="text" id="edificio" placeholder="Ingrese su edificio">
+                <select name="edificio" id="edificio" class="select">
+                    <option value="A">Edificio A</option>
+                    <option value="B">Edificio B</option>
+                    <option value="C">Edificio C</option>
+                    <option value="D">Edificio D</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="apartamento">
-                    <i class="fa fa-email"></i>
+                    <i class="fas fa-door-open"></i>
                     Apartamento
                 </label>
-                <input type="text" id="apartamento" placeholder="Ingrese su apartamento">
+                <input type="text" id="apartamento" name="apartamento" placeholder="Ingrese su apartamento">
             </div>
-            <div class="form-group">
-                <label for="cargo">
-                    <i class="fa fa-email"></i>
-                    Cargo
-                </label>
-                <select name="cargo" id="cargo" disabled>
-                    <option value="2">Residente</option>
-                </select>
-            </div>
+            <input type="hidden" name="cargo" id="cargo" value="2">
             <button type="submit" class="register-btn" id="regis">Registrarse</button>
             <div class="auth-footer">
                 <p><a href="/">← Volver al inicio</a></p>
@@ -101,7 +98,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/conxion.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/loginBT.js"></script>
 </body>
 </html>
