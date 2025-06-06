@@ -47,6 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
         this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
     });
 
+    //VERFICA QUE EN NOMBRE Y APELLIDO SOLO HAYA LETRAS
+    document.getElementById('name').addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+    });
+    //VERFICA QUE EN USUARIO SOLO HAYA LETRAS Y NÚMEROS
+    document.getElementById('user').addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').slice(0, 20);
+    });
+
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         const cedula = document.getElementById('cedula').value;
         if (cedula.length < 7) {

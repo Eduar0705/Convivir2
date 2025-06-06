@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Registro</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/registro.css">
     <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -14,7 +14,7 @@
     <div class="layout">
         <aside class="sidebar" aria-label="Menú lateral">
             <div class="sidebar-header">
-                <a href="./Admin.html">
+                <a href="/admin">
                     <div class="logo">Admin<span>Panel</span></div>
                 </a>
                 <button class="sidebar-toggle" aria-label="Ocultar menú" aria-expanded="true">
@@ -24,7 +24,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="./Admin.html">
+                        <a href="/admin">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -98,25 +98,57 @@
             </header>
             
             <main>
-                <form method="post" autocomplete="off">
+                <form method="post" autocomplete="off" class="login-form" id="form_regis">
                     <div class="login-header">
                         <img src="../img/LOGO.png" alt="Logo ConVivir" class="logo">
                         <h1>ConVivir</h1>
                         <p>Registro</p>
                     </div>
-                    
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre">
-                    <input type="text" name="username" id="username" placeholder="Usuario">
-                    <input type="text" name="CI" id="CI" placeholder="Cedula">
-                    <select name="cargo" id="cargo">
-                        <option value="">Seleccione un cargo</option>
-                        <option value="1">1 - Administración</option>
-                        <option value="2">2 - Usuario</option>
-                    </select>
-                    <input type="email" name="email" id="email" placeholder="Email">
-                    <input type="text" name="telefono" id="telefono" placeholder="Teléfono">
-                    <input type="text" name="apartamento" id="apartamento" placeholder="Apartamento">
-                    <input type="password" name="password" id="password" placeholder="Contraseña">
+
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user"></i> Nombre</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Usuario</label>
+                        <input type="text" name="username" id="username" placeholder="Ingrese su Usuario">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CI"><i class="fas fa-id-card"></i> Cédula</label>
+                        <input type="text" name="CI" id="CI" placeholder="Ingrese su Cédula">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cargo"><i class="fas fa-briefcase"></i> Cargo</label>
+                        <select name="cargo" id="cargo">
+                            <option value="">Seleccione un cargo</option>
+                            <option value="1">1 - Administración</option>
+                            <option value="2">2 - Residente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" name="email" id="email" placeholder="Ingrese su Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                        <input type="text" name="telefono" id="telefono" placeholder="Ingrese su Teléfono">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apartamento"><i class="fas fa-home"></i> Apartamento</label>
+                        <input type="text" name="apartamento" id="apartamento" placeholder="Ingrese su Apartamento">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                        <input type="password" name="password" id="password" placeholder="Ingrese su Contraseña">
+                    </div>
+
                     <button id="regis">Registrar</button>
                 </form>
             </main>

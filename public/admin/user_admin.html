@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
-    <title>ConVivir - Avisos</title>
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/avisos.css">
+    <title>ConVivir - Administración</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../../public/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,7 +13,7 @@
     <div class="layout">
         <aside class="sidebar" aria-label="Menú lateral">
             <div class="sidebar-header">
-                <a href="/admin">
+                <a href="Admin.html">
                     <div class="logo">Admin<span>Panel</span></div>
                 </a>
                 <button class="sidebar-toggle" aria-label="Ocultar menú" aria-expanded="true">
@@ -24,7 +23,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="/admin">
+                        <a href="./Admin.html">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -88,7 +87,7 @@
                     <button class="menu-toggle" aria-label="Mostrar menú">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1>Avisos <i class="fa fa-bullhorn "></i></h1>
+                    <h1>Usuarios <i class="fa fa-user"></i></h1>
                 </div>
                 <div class="navbar-right">
                     <div class="user-profile">
@@ -98,40 +97,18 @@
                 </div>
             </header>
             <main class="content">
-                <div class="cards">
-                    <div class="cardd">
-                        <div class="card-iconn bg-bluee">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-icon bg-blue">
                             <i class="fas fa-users"></i>
                         </div>
-                        <div class="card-infoo">
-                            <input type="text" placeholder="Buscar Usuarios">
-                            <button>Buscar <i class="fa fa-lupa"></i></button>
+                        <div class="card-info">
+                            <h3>Usuarios Registrado</h3>
+                            <p>00</p>
                         </div>
                     </div>
                 </div>
                 <section class="recent-activity">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Usuario</th>
-                                <th>Telefono</th>
-                                <th>Edificio</th>
-                                <th>Apartamento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Eduar</td>
-                                <td>Suarez</td>
-                                <td>eduarss</td>
-                                <td><a href="#">04145003573</a></td>
-                                <td><i class="fa fa-edificio"></i> C</td>
-                                <td><i class="fa fa-home"></i> 23</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </section>
             </main>
             <footer class="footer">

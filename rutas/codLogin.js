@@ -6,8 +6,8 @@ const conexion = require('../config/conexion');
 router.post('/codLogin', function(req, res){
     const {user, pass} = req.body;
 
-    const validar = `SELECT * FROM inf_usuarios WHERE usuario = '${user}' AND clave = '${pass}'`;
-    conexion.query(validar, async function(error, rows){
+    const validar = `SELECT * FROM inf_usuarios WHERE usuario = ? AND clave = ?`;
+    conexion.query(validar,[ user, pass ], async function(error, rows){
         let mensaje;
         if (error) {
             console.log("Error en la consulta de usuario", error);
@@ -15,7 +15,7 @@ router.post('/codLogin', function(req, res){
         }
 
         if (rows.length <= 0) {
-            mensaje = "El usuario no existe";
+            mensaje = "Usuario o contraseña incorrectos";
             return res.render('login', { mensaje, link });
         }
 

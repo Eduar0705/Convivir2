@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Administración</title>
-    <link rel="stylesheet" href="../public/css/admin.css">
-    <link rel="shortcut icon" href="../public/img/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar" aria-label="Menú lateral">
             <div class="sidebar-header">
-                <a href="Admin.html">
+                <a href="/admin">
                     <div class="logo">Admin<span>Panel</span></div>
                 </a>
                 <button class="sidebar-toggle" aria-label="Ocultar menú" aria-expanded="true">
@@ -23,7 +23,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="./Admin.html">
+                        <a href="/admin">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -87,7 +87,19 @@
                     <button class="menu-toggle" aria-label="Mostrar menú">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1>Bienvenido, <%= datos.nombre_A %></h1>
+                    <h1>Bienvenido, <%= datos.nombre_A %>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Información',
+                            text: 'Bienvenido <%= datos.nombre_A %>',
+                            confirmButtonText: 'Aceptar',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    </script>
+                    </h1>
                 </div>
                 <div class="navbar-right">
                     <div class="user-profile">
@@ -104,7 +116,7 @@
                         </div>
                         <div class="card-info">
                             <h3>Usuarios</h3>
-                            <p>00</p>
+                            <p><%= datos.id.length %></p>
                         </div>
                     </div>
                 </div>
@@ -117,5 +129,6 @@
             </footer>
         </div>
     </div>
+    <script src="/js/script.js"></script>
 </body>
 </html>
