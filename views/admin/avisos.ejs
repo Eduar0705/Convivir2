@@ -7,7 +7,7 @@
     <title>ConVivir - Avisos</title>
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/avisos.css">
-    <link rel="shortcut icon" href="../../public/LOGO.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -54,7 +54,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./avisos.html">
+                        <a href="/admin/avisos">
                             <i class="fas fa-bullhorn"></i>
                             <span>Avisos</span>
                         </a>
@@ -74,7 +74,7 @@
                 </ul>
             </nav>
             <div class="salir">
-                <a href="../index.html">
+                <a href="/">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Salir</span>
                 </a>
@@ -104,32 +104,40 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="card-infoo">
-                            <input type="text" placeholder="Buscar Usuarios">
-                            <button>Buscar <i class="fa fa-lupa"></i></button>
+                            <input type="text" id="buscar_cedula" name="buscar_cedula" placeholder="Buscar residentes por cedula">
+                            <button id="btnBuscarCedula" type="button">Buscar <i class="fa fa-search"></i></button>
+                            <button id="btnLimpiarCedula" type="button">Limpiar <i class="fa fa-eraser"></i></button>
                         </div>
                     </div>
                 </div>
                 <section class="recent-activity">
-                    <table>
+                    <table border="1">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Usuario</th>
+                                <th>Cedula</th>
                                 <th>Telefono</th>
                                 <th>Edificio</th>
                                 <th>Apartamento</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Eduar</td>
-                                <td>Suarez</td>
-                                <td>eduarss</td>
-                                <td><a href="#">04145003573</a></td>
-                                <td><i class="fa fa-edificio"></i> C</td>
-                                <td><i class="fa fa-home"></i> 23</td>
-                            </tr>
+                            <% if (avisos.length > 0) { %>
+                                <% avisos.forEach(function(aviso) { %>
+                                    <tr>
+                                        <td><%= aviso.nombre_apellido %></td>
+                                        <td><%= aviso.cedula %></td>
+                                        <td><button class="btn generar-aviso" data-nombre="<%= aviso.nombre_apellido %>" data-telefono="<%= aviso.telefono %>">Generar Aviso</button></td>
+                                        <td><i class="fa fa-building"></i> <%= aviso.edificio %></td>
+                                        <td><i class="fa fa-home"></i> <%= aviso.apartamento %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No hay avisos registrados.</td>
+                                </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </section>
@@ -140,5 +148,13 @@
         </div>
     </div>
     <script src="../js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/avisos.js"></script>
+    <script>
+        document.getElementById('btnLimpiarCedula').addEventListener('click', function() {
+            document.getElementById('buscar_cedula').value = '';
+            location.reload();
+        });
+    </script>
 </body>
 </html>

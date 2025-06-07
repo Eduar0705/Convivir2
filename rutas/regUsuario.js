@@ -7,6 +7,7 @@ router.post('/regUsuario', function(req, res){
     const { name, user, pass, email, telefono, cedula, edificio, apartamento, cargo } = req.body;
     const fecha = new Date().toLocaleDateString('es-ES');
 
+
     const insertar = `
         INSERT INTO inf_usuarios (nombre_apellido, usuario, clave, email, telefono, cedula, edificio, apartamento, id_cargo, fecha) 
         VALUES ('${name}', '${user}', '${pass}', '${email}', '${telefono}', '${cedula}', '${edificio}', '${apartamento}', '${cargo}', '${fecha}');`;

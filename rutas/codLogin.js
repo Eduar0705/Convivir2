@@ -26,7 +26,7 @@ router.post('/codLogin', function(req, res){
             return res.render('login', { mensaje, link });
         }
 
-        // Almacenar datos en sesión (sin clave)
+        // Almacenar datos en sesión 
         req.session.login = true;
         req.session.id = users.id;
         req.session.nombre_A = users.nombre_apellido;
@@ -40,6 +40,16 @@ router.post('/codLogin', function(req, res){
         req.session.fecha = users.fecha;
 
         console.log(req.session);
+        //contador de usuarios registrados
+        const contador = `SELECT COUNT(*) AS total FROM inf_usuarios`;
+        conexion.query(contador, function(err, result) {
+            if (err) {
+                console.error("Error al contar usuarios", err);
+                return res.status(500).send("Error al contar usuarios");
+            }
+            req.session.totalUsuarios = result[0].total;
+            console.log("Total de usuarios registrados:", req.session.totalUsuarios);
+        });
 
         if (users.id_cargo === 1) {
             return res.redirect('/admin');

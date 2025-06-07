@@ -70,7 +70,7 @@ body {
     width: 16px;
 }
 
-.login-form input, #cargo {
+.login-form input, #cargo, .select {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ddd;
@@ -79,7 +79,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.login-form input:focus, #cargo:focus {
+.login-form input:focus, #cargo:focus, .select:focus {
     border-color: #2989d8;
     outline: none;
     box-shadow: 0 0 0 3px rgba(41, 137, 216, 0.1);

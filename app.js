@@ -22,6 +22,7 @@ app.use(require('./rutas/regUsuario'));
 app.use(require('./rutas/codLogin'));
 app.use(require('./rutas/admin'));
 app.use(require('./rutas/users'));
+app.use(require('./rutas/avisos'));
 
 //PUERTO DEL SERVIDOR
 const PORT = process.env.PORT || 3000;

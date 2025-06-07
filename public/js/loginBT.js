@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // VERIFICA QUE TELEFONO SEA SOLO NUMEROS
     document.getElementById('telefono').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);
+        this.value = this.value.replace(/[^0-9+]/g, '').slice(0, 13);
     });
 
     // VERIFICA QUE CEDULA SEA SOLO NÚMEROS CON MÁXIMO 8 DÍGITOS Y MÍNIMO 7

@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./avisos.html">
+                        <a href="/admin/avisos">
                             <i class="fas fa-bullhorn"></i>
                             <span>Avisos</span>
                         </a>
@@ -73,7 +73,7 @@
                 </ul>
             </nav>
             <div class="salir">
-                <a href="../index.html">
+                <a href="/">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Salir</span>
                 </a>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="card-info">
                             <h3>Usuarios</h3>
-                            <p><%= datos.id.length %></p>
+                            <p><%= datos.req.session.totalUsuarios %></p>
                         </div>
                     </div>
                 </div>
