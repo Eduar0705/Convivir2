@@ -178,6 +178,8 @@ table a {
     text-decoration: none;
     transition: all 0.2s;
     font-weight: 500;
+    margin: 0 5px;
+    display: inline-block;
 }
 
 table a:hover {
@@ -233,6 +235,15 @@ table i {
     .cardd {
         max-width: 100%;
     }
+    
+    table th, table td {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+    }
+    
+    .card-infoo button {
+        min-width: 110px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -249,19 +260,33 @@ table i {
     .card-infoo {
         width: 100%;
         flex-direction: column;
+        gap: 15px;
     }
     
     .card-infoo input[type="text"] {
         width: 100%;
+        min-width: auto;
     }
     
     .card-infoo button {
         width: 100%;
     }
     
+    table {
+        min-width: 100%;
+    }
+    
     table th, table td {
         padding: 10px 12px;
         font-size: 0.9rem;
+    }
+    
+    .recent-activity {
+        padding: 15px;
+    }
+    
+    table a {
+        margin: 0 3px;
     }
 }
 
@@ -274,6 +299,7 @@ table i {
         width: 50px;
         height: 50px;
         font-size: 1.2rem;
+        padding: 15px;
     }
     
     .card-infoo input, 
@@ -282,13 +308,64 @@ table i {
         font-size: 0.9rem;
     }
     
+    .recent-activity h2 {
+        font-size: 1.3rem;
+    }
+    
     table th, table td {
         padding: 8px 10px;
         font-size: 0.8rem;
     }
     
+    table a {
+        margin: 0 2px;
+        font-size: 0.9rem;
+    }
+    
     .btn {
         padding: 8px 15px;
         font-size: 0.9rem;
+    }
+    
+    /* Transformar tabla en tarjetas en móviles muy pequeños */
+    @media (max-width: 360px) {
+        table thead {
+            display: none;
+        }
+        
+        table tr {
+            display: block;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            text-align: right;
+            border-bottom: 1px dotted #ddd;
+        }
+        
+        table td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: auto;
+            padding-right: 10px;
+            text-align: left;
+            color: #2c3e50;
+            font-size: 0.75rem;
+        }
+        
+        table td:last-child {
+            justify-content: center;
+            border-bottom: none;
+        }
+        
+        table td:last-child::before {
+            display: none;
+        }
     }
 }

@@ -1,0 +1,505 @@
+/* ===== BASE STYLES ===== */
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2c3e50;
+    --success-color: #2ecc71;
+    --success-dark: #1e8c4c;
+    --danger-color: #e74c3c;
+    --danger-dark: #aa3325;
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+    --border-color: #ddd;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.212);
+    --transition: all 0.3s ease;
+}
+
+/* ===== LAYOUT STYLES ===== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f7fa;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* ===== CARD PANEL STYLES ===== */
+.tarjetas-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex: 1 1 320px;
+    min-width: 300px;
+    max-width: 70%;
+    padding: 24px 20px;
+    align-items: center;
+    transition: var(--transition);
+    gap: 18px;
+    margin: 0 auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.icono-tarjeta {
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    border-radius: 50%;
+    margin-right: 20px;
+    color: white;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.18);
+    border: 3px solid #fff;
+}
+
+.info-tarjeta {
+    flex: 1;
+}
+
+.info-tarjeta h3 {
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.info-tarjeta p {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* ===== FORM STYLES ===== */
+.info-tarjeta input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 10px 0;
+    outline: none;
+    transition: var(--transition);
+}
+
+.info-tarjeta input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.info-tarjeta button,
+#btnAgregarUsuario {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition);
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+#btnBuscarCedula,
+#btnAgregarUsuario {
+    background-color: var(--success-color);
+    color: white;
+    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+}
+
+#btnBuscarCedula:hover,
+#btnAgregarUsuario:hover {
+    background-color: var(--success-dark);
+    transform: translateY(-2px);
+}
+
+#btnLimpiarCedula {
+    background-color: var(--danger-color);
+    color: white;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+}
+
+#btnLimpiarCedula:hover {
+    background-color: var(--danger-dark);
+    transform: translateY(-2px);
+}
+
+/* ===== CRUD TABLE STYLES ===== */
+.crud {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: white;
+}
+
+.crud table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.crud thead {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+.crud th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+.crud tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.crud tbody tr:nth-of-type(even) {
+    background-color: var(--light-gray);
+}
+
+.crud tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+.crud tbody tr:hover {
+    background-color: #e9f7fe;
+}
+
+.crud td {
+    padding: 12px 15px;
+    color: var(--text-color);
+    font-size: 0.95em;
+}
+
+.crud td a {
+    text-decoration: none;
+    color: #555;
+    margin: 0 5px;
+    transition: var(--transition);
+    font-size: 1.1em;
+}
+
+.crud td a.fa-edit:hover {
+    color: var(--primary-color);
+}
+
+.crud td a.fa-trash:hover {
+    color: var(--danger-color);
+}
+
+.crud td:last-child {
+    text-align: center;
+    min-width: 100px;
+}
+
+.crud tbody tr td[colspan] {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+/* ===== FORM STYLES ===== */
+.agg {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+}
+
+.login-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-dark);
+    font-weight: 500;
+}
+input,select,#cargo {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+input:focus,select:focus,#cargo:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 42px;
+    color: #777;
+}
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 1400px) {
+    .tarjeta {
+        max-width: 90%;
+        min-width: 260px;
+    }
+    .crud {
+        font-size: 0.98em;
+    }
+}
+
+@media (max-width: 1200px) {
+    .tarjeta {
+        max-width: 98%;
+        min-width: 220px;
+        padding: 18px 12px;
+    }
+    .icono-tarjeta {
+        width: 70px;
+        height: 70px;
+        font-size: 1.2rem;
+    }
+    .crud th,
+    .crud td {
+        padding: 10px 10px;
+        font-size: 0.92em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .tarjetas-panel {
+        gap: 14px;
+    }
+    .tarjeta {
+        padding: 14px 8px;
+        max-width: 99%;
+        min-width: 180px;
+    }
+    .icono-tarjeta {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    .crud th,
+    .crud td {
+        padding: 8px 8px;
+        font-size: 0.88em;
+    }
+    .crud td a {
+        font-size: 1em;
+    }
+    .agg {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+    }
+    .main-content {
+        padding: 0;
+    }
+    .tarjetas-panel {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .tarjeta {
+        width: 98%;
+        max-width: 420px;
+        min-width: 120px;
+        margin: 0 auto 15px auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .icono-tarjeta {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .info-tarjeta button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    .agg {
+        margin-top: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 10px;
+    }
+    .tarjetas-panel {
+        gap: 8px;
+    }
+    .tarjeta {
+        width: 99%;
+        max-width: 99%;
+        min-width: 0;
+        padding: 10px 4px;
+    }
+    .icono-tarjeta {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+    .info-tarjeta h3 {
+        font-size: 1rem;
+    }
+    .info-tarjeta p {
+        font-size: 3rem;
+    }
+    .info-tarjeta input[type="text"] {
+        padding: 8px 8px;
+        font-size: 0.9rem;
+    }
+    .info-tarjeta button {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    .crud {
+        border-radius: 6px;
+        font-size: 0.95em;
+    }
+    .crud thead {
+        display: none;
+    }
+    .crud tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    .crud td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 6px;
+        text-align: right;
+        border-bottom: 1px dotted var(--border-color);
+        font-size: 0.95em;
+    }
+    .crud td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-right: auto;
+        padding-right: 10px;
+        text-align: left;
+        color: var(--primary-dark);
+    }
+    .crud td:last-child {
+        justify-content: center;
+        border-bottom: none;
+    }
+    .crud td:last-child:before {
+        display: none;
+    }
+    .agg {
+        padding: 10px;
+    }
+    .login-form {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 4px;
+    }
+    .tarjeta {
+        padding: 6px 2px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    .icono-tarjeta {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    .info-tarjeta h3 {
+        font-size: 0.95rem;
+    }
+    .info-tarjeta p {
+        font-size: 2rem;
+    }
+    .info-tarjeta input[type="text"] {
+        padding: 6px 6px;
+        font-size: 0.85rem;
+    }
+    .info-tarjeta button {
+        padding: 7px 8px;
+        font-size: 0.85rem;
+    }
+    .crud {
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+        font-size: 0.85em;
+    }
+    .crud td {
+        padding: 4px 4px;
+        font-size: 0.78em;
+    }
+    .crud td a {
+        font-size: 0.85em;
+        margin: 0 2px;
+    }
+    .agg {
+        padding: 6px;
+        margin-top: 10px;
+    }
+    .login-form {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}

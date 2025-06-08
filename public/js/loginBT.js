@@ -32,11 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // VERIFICA QUE APARTAMENTO SEA SOLO NUMEROS
-    document.getElementById('apartamento').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
-    });
-
     // VERIFICA QUE TELEFONO SEA SOLO NUMEROS
     document.getElementById('telefono').addEventListener('input', function() {
         this.value = this.value.replace(/[^0-9+]/g, '').slice(0, 13);

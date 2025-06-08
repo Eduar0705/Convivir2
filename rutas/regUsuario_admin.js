@@ -3,7 +3,7 @@ const router = express.Router();
 const conexion = require('../config/conexion');
 const link = require('../config/link');
 
-router.post('/regUsuario', function(req, res){
+router.post('/regUsuario_admin', function(req, res) {
     const { name, user, pass, email, telefono, cedula, edificio, apartamento, cargo } = req.body;
     const fecha = new Date().toLocaleDateString('es-ES');
 
@@ -13,15 +13,13 @@ router.post('/regUsuario', function(req, res){
     `;
     const valores = [name, user, pass, email, telefono, cedula, edificio, apartamento, cargo, fecha];
 
-    conexion.query(insertar,valores, function(err, row){
-        if(err){
-            console.error("Error al insertar el usuario", err);
-            res.status(500).send("Error al registrar usuario");
-        } else {
-            console.log("Usuario insertado correctamente");
-            const mensaje = "Usuario registrado correctamente ya puede iniciar sesión";
-            res.render("login", { mensaje, linkLogin: link.linkLogin });
+    conexion.query(insertar, valores, function(err, row) {
+        if (err) {
+            console.log("Error al registrar usuario", err);
+            return res.status(500).send("Error al registrar usuario");
         }
+        console.log("Usuario registrado con éxito");
+        res.redirect('/admin/user_admin');
     });
 });
 

@@ -83,16 +83,16 @@ async function generarAviso(nombre, telefono) {
 
     // Detalles según el motivo seleccionado
     const detallesOptions = {
-        'Pago de mensualidad': ['Pagos atrasados', 'Ponerte al día con el pago'],
+        'Pago de mensualidad': ['Pagos atrasados', 'Es importante que actualices tu pago'],
         'Heces de su mascota': ['Multa por no recoger heces'],
-        'Ruido en apartamento': ['Ruidos en horas no laborables'],
+        'Ruido en apartamento': ['Ruidos en horas no adecuadas'],
         'Mal estacionado': ['Estacionado en puesto equivocado'],
-        'Llave desactivada': ['Ponerte al día con el pago'],
-        'Control del portón': ['Ponerte al día con el pago'],
-        'Desorden en áreas verdes': ['No limpieza del área usada'],
-        'Desorden en la piscina': ['No cumplieron normas de la piscina'],
-        'Desorden en salón de fiestas': ['No limpieza del área usada'],
-        'Desorden en la zona de parrilla': ['No limpiar el área usada']
+        'Llave desactivada': ['Es importante que actualices tu pago'],
+        'Control del portón': ['Es importante que actualices tu pago'],
+        'Desorden en áreas verdes': ['No esta limpia el área utilizada'],
+        'Desorden en la piscina': ['No se cumplieron con las normas de aseo en la piscina'],
+        'Desorden en salón de fiestas': ['No esta limpia el área utilizada'],
+        'Desorden en la zona de parrilla': ['No esta limpia el área utilizada']
     };
 
     const { value: detalle } = await Swal.fire({
