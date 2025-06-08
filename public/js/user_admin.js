@@ -60,9 +60,9 @@ document.getElementById('cedula').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
 });
 
-// VERIFICA QUE EN NOMBRE Y APELLIDO SOLO HAYA LETRAS
+// VERIFICA QUE EN NOMBRE Y APELLIDO SOLO HAYA LETRAS (incluyendo acentos y ñ)
 document.getElementById('name').addEventListener('input', function() {
-    this.value = this.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+    this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').slice(0, 50);
 });
 
 // VERIFICA QUE EN USUARIO SOLO HAYA LETRAS Y NÚMEROS

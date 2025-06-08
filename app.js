@@ -25,6 +25,7 @@ app.use(require('./rutas/admin'));
 app.use(require('./rutas/users'));
 app.use(require('./rutas/avisos'));
 app.use(require('./rutas/user_admin'));
+app.use(require('./rutas/pagos'));
 const deleteUser = require('./rutas/delete_user');
 app.use('/', deleteUser);
 

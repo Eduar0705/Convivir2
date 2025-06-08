@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./pagos.html">
+                        <a href="/admin/pagos">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pagos</span>
                         </a>
@@ -100,69 +100,12 @@
                         <div class="info-tarjeta">
                             <h3>Usuarios Registrados</h3>
                             <p><%= avisos.length %></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tarjetas-panel">
-                    <div class="tarjeta">
-                        <div class="icono-tarjeta fondo-azul">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="info-tarjeta">
-                            <h3>Usuarios Registrados</h3>
                             <input type="text" id="buscar_cedula" name="buscar_cedula" placeholder="Buscar residentes por cédula">
                             <button id="btnBuscarCedula" type="button">Buscar <i class="fa fa-search"></i></button>
                             <button id="btnLimpiarCedula" type="button">Limpiar <i class="fa fa-eraser"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="crud">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre y Apellido</th>
-                                <th>Usuario</th>
-                                <th>Correo</th>
-                                <th>Telefono</th>
-                                <th>Cedula</th>
-                                <th>Torre</th>
-                                <th>Apartamento</th>
-                                <th>Cargo de Usuario</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% if (avisos.length > 0) { %>
-                                <% avisos.forEach(function(aviso) { %>
-                                    <tr>
-                                        <td><%= aviso.id %></td>
-                                        <td><%= aviso.nombre_apellido %></td>
-                                        <td><%= aviso.usuario %></td>
-                                        <td><%= aviso.email %></td>
-                                        <td><%= aviso.telefono %></td>
-                                        <td><%= aviso.cedula %></td>
-                                        <td><%= aviso.edificio %></td>
-                                        <td><%= aviso.apartamento %></td>
-                                        <td><%= aviso.id_cargo === 1 ? 'Administrador' : (aviso.id_cargo === 2 ? 'Residente' : aviso.id_cargo) %></td>
-                                        <td>
-                                            <a href="#" 
-                                                class="fa fa-trash" 
-                                                title="Eliminar" 
-                                                onclick="eliminarUsuario('<%= aviso.id %>'); return false;">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <% }); %>
-                            <% } else { %>
-                                <tr>
-                                    <td colspan="10">No hay avisos registrados.</td>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                </div>
-
                 <div class="agg">
                     <form class="login-form" id="loginForm" method="post" action="/regUsuario_admin" autocomplete="off">
                         <div class="form-group">
@@ -298,6 +241,50 @@
                         </select>
                         <button id="btnAgregarUsuario" type="submit">Agregar usuario <i class="fa fa-user-plus"></i></button>
                     </form>
+                </div>
+                <div class="crud">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre y Apellido</th>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Cedula</th>
+                                <th>Torre</th>
+                                <th>Apartamento</th>
+                                <th>Cargo de Usuario</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (avisos.length > 0) { %>
+                                <% avisos.forEach(function(aviso) { %>
+                                    <tr>
+                                        <td><%= aviso.id %></td>
+                                        <td><%= aviso.nombre_apellido %></td>
+                                        <td><%= aviso.usuario %></td>
+                                        <td><%= aviso.email %></td>
+                                        <td><%= aviso.telefono %></td>
+                                        <td><%= aviso.cedula %></td>
+                                        <td><%= aviso.edificio %></td>
+                                        <td><%= aviso.apartamento %></td>
+                                        <td><%= aviso.id_cargo === 1 ? 'Administrador' : (aviso.id_cargo === 2 ? 'Residente' : aviso.id_cargo) %></td>
+                                        <td>
+                                            <a href="#" 
+                                                class="fa fa-trash" title="Eliminar" onclick="eliminarUsuario('<%= aviso.id %>'); return false;">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="10">No hay avisos registrados.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </div>
             </main>
             <footer class="footer">

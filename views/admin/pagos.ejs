@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
+    <title>ConVivir - Administración</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/pagos.css">
+    <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar" aria-label="Menú lateral">
+            <div class="sidebar-header">
+                <a href="/admin">
+                    <div class="logo">Admin<span>Panel</span></div>
+                </a>
+                <button class="sidebar-toggle" aria-label="Ocultar menú" aria-expanded="true">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/admin">
+                            <i class="fas fa-home"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/user_admin">
+                            <i class="fas fa-users"></i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/pagos">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Pagos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./estadisticas.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Estadísticas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./proveedores.html">
+                            <i class="fas fa-truck"></i>
+                            <span>Proveedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/avisos">
+                            <i class="fas fa-bullhorn"></i>
+                            <span>Avisos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./configuracion.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Configuraciones</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="salir">
+                <a href="/">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Salir</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <!-- Header -->
+            <header class="navbar" aria-label="Menú principal">
+                <div class="navbar-left">
+                    <button class="menu-toggle" aria-label="Mostrar menú">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Pagos <i class="fa fa-money-bill-wave"></i></h1>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile">
+                        <i class="fas fa-user-shield"></i>
+                        <span class="username">Administrador</span>
+                    </div>
+                </div>
+            </header>
+            <main class="payments-container">
+                <!-- Resumen de Pagos -->
+                <section class="summary-grid">
+                    <div class="summary-card total">
+                        <div class="summary-title">Total Pagos</div>
+                        <div class="summary-amount">1000$</div>
+                    </div>
+                    <div class="summary-card pending">
+                        <div class="summary-title">Pagos Pendientes</div>
+                        <div class="summary-amount">1000$</div>
+                    </div>
+                </section>
+                <!-- Filtros -->
+                <section class="filters-section">
+                    <div class="filters-row">
+                        <div class="filter-group search-box">
+                            <label>Buscar</label>
+                            <input type="text" placeholder="Buscar por Cedula o Referencia...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Método de Pago</label>
+                            <select>
+                                <option>Todos</option>
+                                <option>Pago Movil</option>
+                                <option>Transferencia</option>
+                                <option>Efectivo</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Desde</label>
+                            <input type="date">
+                        </div>
+                        <div class="filter-group">
+                            <label>Hasta</label>
+                            <input type="date">
+                        </div>
+                        <div class="filter-group">
+                            <button class="btn-primary">
+                                <i class="fas fa-search"></i>
+                                Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tabla de Pagos -->
+                <section class="payments-table-section">
+                    <div class="table-header">
+                        <div class="table-title">Historial de Pagos</div>
+                        <div class="table-actions">
+                            <button class="btn-secondary" id="export-excel">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </button>
+                            <button class="btn-secondary" id="export-pdf">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </button>
+                        </div>
+                    </div>
+                    <table class="payments-table">
+                        <thead>
+                            <tr>
+                                <th>N° Referencia</th>
+                                <th>Residente</th>
+                                <th>Cedula</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                                <th>Método</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>8998</td>
+                                <td>nombre4</td>
+                                <td>26654789</td>
+                                <td>21/12/2023</td>
+                                <td>500</td>
+                                <td>Pago Movil</td>
+                                <td>
+                                    <div class="actions-cell">
+                                        <button class="btn-secondary" title="Factura" id="generar_factura">
+                                            <i class="fas fa-file-invoice"></i>
+                                        </button>
+                                        <button class="btn-secondary" title="Eliminar" id="eliminar_factura">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/pagos.js"></script>
+</body>
+</html>

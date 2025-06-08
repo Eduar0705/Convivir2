@@ -6,14 +6,14 @@
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Usuarios</title>
     <link rel="stylesheet" href="/css/admin.css">
-    <link rel="shortcut icon" href="../public/img/LOGO.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar" aria-label="Menú lateral">
             <div class="sidebar-header">
-                <a href="./Users.html"><div class="logo">User<span>Panel</span></div></a>
+                <a href="/users"><div class="logo">User<span>Panel</span></div></a>
                 <button class="sidebar-toggle" aria-label="Ocultar menú" aria-expanded="true">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -21,25 +21,25 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="Users.html">
+                        <a href="/users">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./pagos_usu.html">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pagos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./avisos_usu.html">
                             <i class="fas fa-bullhorn"></i>
                             <span>Avisos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./config_usu.html">
                             <i class="fas fa-cog"></i>
                             <span>Configuraciones</span>
                         </a>
@@ -47,7 +47,7 @@
                 </ul>
             </nav>
             <div class="salir">
-                <a href="../index.html">
+                <a href="/">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Salir</span>
                 </a>
@@ -60,17 +60,6 @@
                         <i class="fas fa-bars"></i>
                     </button>
                     <h1>Bienvenido, <%= datos.nombre_A %>
-                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Información',
-                            text: 'Bienvenido <%= datos.nombre_A %>',
-                            confirmButtonText: 'Aceptar',
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                    </script>
                     </h1>
                 </div>
                 <div class="navbar-right">

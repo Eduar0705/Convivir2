@@ -6,6 +6,7 @@
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Administración</title>
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/estadisticas.css">
     <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -35,7 +36,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./pagos.html">
+                        <a href="/admin/pagos">
                             <i class="fas fa-money-bill-wave"></i>
                             <span>Pagos</span>
                         </a>
@@ -91,8 +92,104 @@
                 </div>
             </header>
             <main class="content">
-                <section class="recent-activity">
-                </section>
+                <main class="stats-container">
+                    <!-- KPIs Principales -->
+                    <section class="kpi-grid">
+                        <div class="kpi-card users">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Total Residentes</span>
+                                <div class="kpi-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="kpi-value">00</div>
+                        </div>
+
+                        <div class="kpi-card apartments">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Apartamentos Ocupados</span>
+                                <div class="kpi-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                            <div class="kpi-value">00</div>
+                        </div>
+
+                        <div class="kpi-card payments">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Pagos Recibidos</span>
+                                <div class="kpi-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                            </div>
+                            <div class="kpi-value">100$</div>
+                        </div>
+                    </section>
+
+                    <!-- Estadísticas Adicionales -->
+                    <section class="additional-stats">
+                        <div class="stat-widget">
+                            <h3 style="margin-bottom: 15px; color: #333;">Pagos Retrasados</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Residente</th>
+                                        <th>Apartamento</th>
+                                        <th>Monto</th>
+                                        <th>Días de Retraso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pedro Salazar</td>
+                                        <td>302</td>
+                                        <td>$350</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>María López</td>
+                                        <td>210</td>
+                                        <td>$420</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="stat-widget">
+                            <h3 style="margin-bottom: 15px; color: #333;">Pagos Recientes</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Residente</th>
+                                        <th>Apartamento</th>
+                                        <th>Monto</th>
+                                        <th>Fecha de Pago</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Andrea Torres</td>
+                                        <td>105</td>
+                                        <td>$300</td>
+                                        <td>2024-06-10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jorge Pérez</td>
+                                        <td>208</td>
+                                        <td>$400</td>
+                                        <td>2024-06-12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Camila Díaz</td>
+                                        <td>401</td>
+                                        <td>$350</td>
+                                        <td>2024-06-13</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </main>
             </main>
             <footer class="footer">
                 <p>&copy; 2023 Panel de Administración. Todos los derechos reservados.</p>
