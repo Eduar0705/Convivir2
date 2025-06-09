@@ -22,12 +22,16 @@ app.use(require('./rutas/regUsuario'));
 app.use(require('./rutas/regUsuario_admin'));
 app.use(require('./rutas/codLogin'));
 app.use(require('./rutas/admin'));
-app.use(require('./rutas/users'));
 app.use(require('./rutas/avisos'));
 app.use(require('./rutas/user_admin'));
 app.use(require('./rutas/pagos'));
 const deleteUser = require('./rutas/delete_user');
 app.use('/', deleteUser);
+
+//RUTAS USUARIOS
+app.use(require('./rutas/users'));
+app.use(require('./rutas/aggPagos'));
+app.use(require('./rutas/avisosUsuario'));
 
 //PUERTO DEL SERVIDOR
 const PORT = process.env.PORT || 3000;

@@ -94,13 +94,27 @@
             <main class="payments-container">
                 <!-- Resumen de Pagos -->
                 <section class="summary-grid">
+                    <%
+                        let totalPagos = 0;
+                        pagos.forEach(function(pago) {
+                            totalPagos += Number(pago.monto_pago) || 0;
+                        });
+                    %>
                     <div class="summary-card total">
-                        <div class="summary-title">Total Pagos</div>
-                        <div class="summary-amount">1000$</div>
+                        <div class="summary-title">Monto Total Bs</div>
+                        <div class="summary-amount"><%= totalPagos %>BS</div>
                     </div>
                     <div class="summary-card pending">
-                        <div class="summary-title">Pagos Pendientes</div>
-                        <div class="summary-amount">1000$</div>
+                        <div class="summary-title">Precio del dolar</div>
+                        <div class="summary-amount">
+                            <input type="number" name="precio-dolar" id="precio-dolar" step="0.01" min="0">
+                            <button type="button" id="aceptar-precio">Aceptar</button>
+                            <p id="mostrar-precio"></p>
+                        </div>
+                    </div>
+                    <div class="summary-card pending">
+                        <div class="summary-title">Monto Total USD</div>
+                        <div class="summary-amount" id="total-usd">0 $</div>
                     </div>
                 </section>
                 <!-- Filtros -->
@@ -108,30 +122,28 @@
                     <div class="filters-row">
                         <div class="filter-group search-box">
                             <label>Buscar</label>
-                            <input type="text" placeholder="Buscar por Cedula o Referencia...">
+                            <input type="text" id="search-input" placeholder="Buscar por Cedula o Referencia...">
                         </div>
                         <div class="filter-group">
                             <label>Método de Pago</label>
-                            <select>
-                                <option>Todos</option>
-                                <option>Pago Movil</option>
-                                <option>Transferencia</option>
-                                <option>Efectivo</option>
+                            <select id="metodo-select">
+                                <option value="">Todos</option>
+                                <option value="Pago Movil">Pago Movil</option>
+                                <option value="Transferencia">Transferencia</option>
+                                <option value="Efectivo">Efectivo</option>
                             </select>
                         </div>
                         <div class="filter-group">
                             <label>Desde</label>
-                            <input type="date">
+                            <input type="date" id="desde-input">
                         </div>
                         <div class="filter-group">
                             <label>Hasta</label>
-                            <input type="date">
+                            <input type="date" id="hasta-input">
                         </div>
                         <div class="filter-group">
-                            <button class="btn-primary">
-                                <i class="fas fa-search"></i>
-                                Filtrar
-                            </button>
+                            <button class="btn-buscar" id="filtrar-btn"><i class="fas fa-search"></i>Filtrar</button>
+                            <button class="btn-limpiar" id="limpiar-btn"><i class="fas fa-eraser"></i> Limpiar</button>
                         </div>
                     </div>
                 </section>
@@ -158,18 +170,22 @@
                                 <th>Fecha</th>
                                 <th>Monto</th>
                                 <th>Método</th>
+                                <th>Banco Emisor</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>8998</td>
-                                <td>nombre4</td>
-                                <td>26654789</td>
-                                <td>21/12/2023</td>
-                                <td>500</td>
-                                <td>Pago Movil</td>
-                                <td>
+                            <% if(pagos.length > 0){ %>
+                                <% pagos.forEach(function(pago){  %>
+                                <tr>
+                                    <td><%= pago.num_referencia %></td>
+                                    <th><%= pago.nombre_p %></th>
+                                    <th><%= pago.cedula %></th>
+                                    <th><%= pago.fecha_pago ? new Date(pago.fecha_pago).toLocaleDateString('es-ES') : '' %></th>
+                                    <th><%= pago.monto_pago %></th>
+                                    <th><%= pago.tipo_pago %></th>
+                                    <th><%= pago.bancoEmisor %></th>
+                                    <td>
                                     <div class="actions-cell">
                                         <button class="btn-secondary" title="Factura" id="generar_factura">
                                             <i class="fas fa-file-invoice"></i>
@@ -179,7 +195,13 @@
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
+                                </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="10">No hay avisos registrados.</td>
+                                </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </section>
@@ -188,5 +210,20 @@
     </div>
     <script src="../js/script.js"></script>
     <script src="../js/pagos.js"></script>
+    <script>
+        document.getElementById('aceptar-precio').addEventListener('click', function() {
+            const precio = document.getElementById('precio-dolar').value;
+            document.getElementById('mostrar-precio').textContent = precio ? `Precio actual: ${precio} BS` : '';
+        });
+        document.getElementById('aceptar-precio').addEventListener('click', function() {
+            const precio = parseFloat(document.getElementById('precio-dolar').value);
+            const totalPagos = '<%= totalPagos %>';
+            let totalUSD = 0;
+            if (precio > 0) {
+                totalUSD = (totalPagos / precio).toFixed(2);
+            }
+            document.getElementById('total-usd').textContent = totalUSD + ' $';
+        });
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <meta name="description" content="Panel de administración para gestionar usuarios y configuraciones">
     <title>ConVivir - Usuarios</title>
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="../css/avisos.css">
     <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -70,7 +71,42 @@
             </header>
             <main class="content">
                 <section class="recent-activity">
-                    <h2>Actividad Reciente</h2>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cedula</th>
+                                <th>Aviso</th>
+                                <th>Sector</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% var encontrado = false; %>
+                            <% if (avisos.length > 0) { %>
+                                <% avisos.forEach(function(aviso) { %>
+                                    <% if (aviso.id_cargo === 1) { %>
+                                        <tr>
+                                            <td><%= aviso.nombre_apellido %></td>
+                                            <td><%= aviso.cedula %></td>
+                                            <td><button class="btn generar-aviso" data-nombre="<%= aviso.nombre_apellido %>" data-telefono="<%= aviso.telefono %>">Generar Aviso</button></td>
+                                            <td>Administración</td>
+                                        </tr>
+                                        <% encontrado = true; %>
+                                    <% } %>
+                                <% }); %>
+                                <% if (!encontrado) { %>
+                                    <tr>
+                                        <td colspan="5">No hay avisos registrados para el cargo de Administración.</td>
+                                    </tr>
+                                <% } %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No hay avisos registrados.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </section>
             </main>
             <footer class="footer">
@@ -79,5 +115,7 @@
         </div>
     </div>
     <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/avisosUsers.js"></script>
 </body>
 </html>

@@ -77,3 +77,63 @@ document.getElementById('export-pdf').addEventListener('click', function () {
     win.document.close();
     setTimeout(() => win.print(), 500);
 });
+
+// BOTONES DE BUSCAR Y LIMPIAR
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const metodoSelect = document.getElementById('metodo-select');
+    const desdeInput = document.getElementById('desde-input');
+    const hastaInput = document.getElementById('hasta-input');
+    const filtrarBtn = document.getElementById('filtrar-btn');
+    const limpiarBtn = document.getElementById('limpiar-btn');
+    const table = document.querySelector('.payments-table tbody');
+
+    function filtrarTabla() {
+        const search = searchInput.value.trim().toLowerCase();
+        const metodo = metodoSelect.value;
+        const desde = desdeInput.value;
+        const hasta = hastaInput.value;
+
+        Array.from(table.rows).forEach(row => {
+            // Saltar fila de "No hay avisos registrados"
+            if (row.cells.length < 6) return;
+
+            const referencia = row.cells[0].textContent.toLowerCase();
+            const cedula = row.cells[2].textContent.toLowerCase();
+            const fecha = row.cells[3].textContent;
+            const metodoPago = row.cells[5].textContent;
+
+            let visible = true;
+
+            // Buscar por referencia o cedula
+            if (search && !(referencia.includes(search) || cedula.includes(search))) {
+                visible = false;
+            }
+
+            // Filtrar por método de pago
+            if (metodo && metodoPago !== metodo) {
+                visible = false;
+            }
+
+            // Filtrar por fecha
+            if (desde && new Date(fecha.split('/').reverse().join('-')) < new Date(desde)) {
+                visible = false;
+            }
+            if (hasta && new Date(fecha.split('/').reverse().join('-')) > new Date(hasta)) {
+                visible = false;
+            }
+
+            row.style.display = visible ? '' : 'none';
+        });
+    }
+
+    filtrarBtn.addEventListener('click', filtrarTabla);
+
+    limpiarBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        metodoSelect.value = '';
+        desdeInput.value = '';
+        hastaInput.value = '';
+        filtrarTabla();
+    });
+});
