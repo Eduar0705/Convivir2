@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/pagos.css">
     <link rel="shortcut icon" href="../img/LOGO.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="layout">
@@ -187,7 +187,7 @@
                                     <th><%= pago.bancoEmisor %></th>
                                     <td>
                                     <div class="actions-cell">
-                                        <button class="btn-secondary" title="Factura" id="generar_factura">
+                                        <button class="btn-secondary generar_factura" title="Factura">
                                             <i class="fas fa-file-invoice"></i>
                                         </button>
                                         <button class="btn-secondary" title="Eliminar" id="eliminar_factura">
@@ -210,6 +210,8 @@
     </div>
     <script src="../js/script.js"></script>
     <script src="../js/pagos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/facturaCreate.js"></script>
     <script>
         document.getElementById('aceptar-precio').addEventListener('click', function() {
             const precio = document.getElementById('precio-dolar').value;
