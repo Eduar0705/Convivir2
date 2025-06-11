@@ -1,379 +1,434 @@
-/* ===== ESTILOS GENERALES ===== */
+/* ===== BASE STYLES ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
-    line-height: 1.6;
-    overflow-x: hidden;
+font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+color: #333333;
+background-color: #f8f9fa;
+line-height: 1.6;
+overflow-x: hidden;
 }
 
-/* ===== ESTRUCTURA PRINCIPAL ===== */
+/* ===== LAYOUT ===== */
 .layout {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
+display: flex;
+min-height: 100vh;
 }
 
-/* ===== BARRA LATERAL (SIDEBAR) - ESTILOS PRINCIPALES ===== */
+/* ===== SIDEBAR ===== */
 .sidebar {
-    width: 250px;
-    background: #2c3e50;
-    color: #ffffff;
-    min-height: 100vh;
-    position: fixed;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-    left: 0;
-    top: 0;
+width: 250px;
+background: #2c3e50;
+color: #ffffff;
+min-height: 100vh;
+position: fixed;
+z-index: 1000;
+display: flex;
+flex-direction: column;
+transition: transform 0.3s ease;
+left: 0;
+top: 0;
 }
 
-/* Clase para ocultar el sidebar */
 .sidebar.collapsed {
-    transform: translateX(-100%);
+transform: translateX(-100%);
 }
 
-/* Encabezado del sidebar */
 .sidebar-header {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+padding: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-header a {
-    text-decoration: none;
+text-decoration: none;
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    white-space: nowrap;
+font-size: 1.5rem;
+font-weight: 700;
+color: #ffffff;
+white-space: nowrap;
 }
 
 .logo span {
-    color: #3498db;
+color: #3498db;
 }
 
-/* Botón para ocultar/mostrar sidebar */
 .sidebar-toggle {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: none;
+background: none;
+border: none;
+color: #ffffff;
+font-size: 1.2rem;
+cursor: pointer;
+padding: 8px;
+display: none;
+transition: all 0.3s ease;
+border-radius: 4px;
 }
 
-/* Navegación del sidebar */
+.sidebar-toggle:hover,
+.sidebar-toggle:focus {
+background: rgba(255, 255, 255, 0.1);
+outline: none;
+}
+
+/* ===== SIDEBAR NAVIGATION ===== */
 .sidebar nav {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px 0;
+flex: 1;
+overflow-y: auto;
+padding: 10px 0;
+display: flex;
+flex-direction: column;
 }
 
 .sidebar nav ul {
-    list-style: none;
+list-style: none;
+flex: 1;
 }
 
 .sidebar nav li {
-    margin: 5px 0;
+margin: 5px 0;
 }
 
 .sidebar nav a {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    color: #ffffff;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    border-radius: 4px;
-    margin: 0 10px;
+display: flex;
+align-items: center;
+padding: 12px 20px;
+color: #ffffff;
+text-decoration: none;
+border-radius: 4px;
+margin: 0 10px;
+transition: all 0.3s ease;
+min-height: 44px;
 }
 
-.sidebar nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.sidebar nav a:hover,
+.sidebar nav a:focus {
+background: rgba(255, 255, 255, 0.1);
+outline: none;
+}
+
+.sidebar nav a:focus {
+box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
 }
 
 .sidebar nav i {
-    margin-right: 10px;
-    font-size: 1.1rem;
-    min-width: 24px;
-    text-align: center;
+margin-right: 10px;
+font-size: 1.1rem;
+min-width: 24px;
+text-align: center;
 }
 
-/* Botón de salida */
+/* ===== LOGOUT BUTTON ===== */
 .salir {
-    padding: 20px;
-    margin-top: auto;
+padding: 15px 20px;
+margin-top: 20px;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .salir a {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    background-color: #e74c3c;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+display: flex;
+align-items: center;
+padding: 12px 20px;
+background: #e74c3c;
+color: #ffffff;
+text-decoration: none;
+border-radius: 5px;
+transition: all 0.3s ease;
+min-height: 44px;
+font-weight: 500;
 }
 
-.salir a:hover {
-    background-color: #c0392b;
+.salir a:hover,
+.salir a:focus {
+background: #c0392b;
+outline: none;
+transform: translateY(-1px);
+}
+
+.salir a:focus {
+box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
 }
 
 .salir i {
-    margin-right: 10px;
+margin-right: 10px;
+font-size: 1.1rem;
 }
 
-/* ===== CONTENIDO PRINCIPAL ===== */
+/* ===== MAIN CONTENT ===== */
 .main-content {
-    flex: 1;
-    margin-left: 250px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: margin-left 0.3s ease;
+flex: 1;
+margin-left: 250px;
+display: flex;
+flex-direction: column;
+transition: margin-left 0.3s ease;
+min-height: 100vh;
 }
 
-/* Cuando el sidebar está colapsado */
 .sidebar.collapsed + .main-content {
-    margin-left: 0;
+margin-left: 0;
 }
 
-/* ===== BARRA SUPERIOR (NAVBAR) ===== */
+/* ===== NAVBAR ===== */
 .navbar {
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+background: #ffffff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+padding: 15px 25px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: sticky;
+top: 0;
+z-index: 100;
 }
 
 .navbar-left {
-    display: flex;
-    align-items: center;
+display: flex;
+align-items: center;
+gap: 15px;
 }
 
 .menu-toggle {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-right: 15px;
-    display: none;
-    color: #333;
+background: none;
+border: none;
+font-size: 1.2rem;
+cursor: pointer;
+padding: 8px;
+display: none;
+color: #333333;
+transition: all 0.3s ease;
+border-radius: 4px;
+min-height: 44px;
+min-width: 44px;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+background: #f8f9fa;
+outline: none;
 }
 
 .navbar-left h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
+font-size: 1.5rem;
+font-weight: 600;
+color: #333333;
 }
 
 .user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 0.95rem;
 }
 
 .user-profile i {
-    font-size: 1.2rem;
+font-size: 1.2rem;
+color: #666666;
 }
 
 .username {
-    font-weight: 500;
+font-weight: 500;
+color: #333333;
 }
 
-/* ===== CONTENIDO CENTRAL ===== */
+/* ===== CONTENT ===== */
 .content {
-    padding: 25px;
-    flex: 1;
+padding: 25px;
+flex: 1;
 }
 
-/* Tarjetas del dashboard */
 .dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 20px;
+margin-bottom: 30px;
 }
 
 .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    transition: transform 0.2s;
+background: #ffffff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+padding: 20px;
+display: flex;
+align-items: center;
+transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+transform: translateY(-3px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    color: #fff;
-    font-size: 1.2rem;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 15px;
+color: #ffffff;
+font-size: 1.2rem;
 }
 
 .bg-blue {
-    background: #3498db;
+background: #3498db;
 }
 
 .card-info h3 {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 5px;
+font-size: 1rem;
+color: #666666;
+margin-bottom: 5px;
 }
 
 .card-info p {
-    font-size: 1.5rem;
-    font-weight: bold;
+font-size: 1.5rem;
+font-weight: 600;
+color: #333333;
 }
 
-/* Sección de actividad reciente */
 .recent-activity {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 20px;
+background: #ffffff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+padding: 20px;
 }
 
 .recent-activity h2 {
-    margin-bottom: 20px;
-    font-size: 1.3rem;
+margin-bottom: 20px;
+font-size: 1.3rem;
+color: #333333;
 }
 
-/* ===== PIE DE PÁGINA ===== */
+/* ===== FOOTER ===== */
 .footer {
-    padding: 20px;
-    text-align: center;
-    color: #666;
-    font-size: 0.9rem;
-    background: #fff;
+padding: 20px;
+text-align: center;
+color: #666666;
+font-size: 1rem;
+background: #ffffff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* ===== DISEÑO RESPONSIVE ===== */
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 992px) {
-    /* Sidebar oculto por defecto en móviles */
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    
-    /* Sidebar visible */
-    .sidebar.show {
-        transform: translateX(0);
-    }
-    
-    /* Ajustar contenido principal */
-    .main-content {
-        margin-left: 0;
-    }
-    
-    /* Mostrar botones de menú */
-    .menu-toggle, .sidebar-toggle {
-        display: block;
-    }
-    
-    /* Asegurar que el sidebar esté encima del contenido */
-    .sidebar {
-        z-index: 1001;
-    }
-    
-    /* Oscurecer contenido cuando el sidebar está abierto */
-    .main-content::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-    }
-    
-    .sidebar.show + .main-content::after {
-        opacity: 1;
-        pointer-events: auto;
-    }
+.sidebar {
+transform: translateX(-100%);
 }
 
-@media (max-width: 768px) {
-    /* Ajustar grid de tarjetas */
-    .dashboard-cards {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .navbar-left h1 {
-        font-size: 1.2rem;
-    }
+.sidebar.show {
+transform: translateX(0);
 }
 
-@media (max-width: 576px) {
-    /* Una sola columna en móviles pequeños */
-    .dashboard-cards {
-        grid-template-columns: 1fr;
-    }
-    
-    .content {
-        padding: 15px;
-    }
-    
-    /* Centrar contenido de tarjetas */
-    .card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .card-icon {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    /* Ocultar nombre de usuario en móviles */
-    .username {
-        display: none;
-    }
+.main-content {
+margin-left: 0;
 }
-/* Agregar al final del CSS */
+
+.menu-toggle,
+.sidebar-toggle {
+display: block;
+}
+
 body.sidebar-open {
-    overflow: hidden;
+overflow: hidden;
 }
 
 body.sidebar-open .main-content::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    pointer-events: auto;
-    transition: opacity 0.3s ease;
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 999;
+pointer-events: auto;
+opacity: 1;
+transition: opacity 0.3s ease;
+}
+}
+
+@media (max-width: 768px) {
+.dashboard-cards {
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.navbar-left h1 {
+font-size: 1.3rem;
+}
+
+.content {
+padding: 20px;
+}
+}
+
+@media (max-width: 576px) {
+.dashboard-cards {
+grid-template-columns: 1fr;
+}
+
+.content {
+padding: 15px;
+}
+
+.card {
+flex-direction: column;
+text-align: center;
+}
+
+.card-icon {
+margin-right: 0;
+margin-bottom: 15px;
+}
+
+.username {
+display: none;
+}
+
+.navbar {
+padding: 10px 15px;
+}
+
+.user-profile {
+font-size: 0.9rem;
+}
+}
+
+@media (max-width: 400px) {
+.navbar-left h1 {
+font-size: 1.1rem;
+}
+
+.card-info p {
+font-size: 1.3rem;
+}
+
+.recent-activity h2 {
+font-size: 1.1rem;
+}
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+* {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+}
+
+/* Focus visible for better keyboard navigation */
+.sidebar nav a:focus-visible,
+.salir a:focus-visible,
+.menu-toggle:focus-visible,
+.sidebar-toggle:focus-visible {
+outline: 2px solid #3498db;
+outline-offset: 2px;
 }
