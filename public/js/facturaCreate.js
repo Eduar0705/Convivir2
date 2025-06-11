@@ -16,7 +16,8 @@ document.querySelectorAll('.generar_factura').forEach(button => {
         const monto = row.cells[4].textContent;
         const metodo = row.cells[5].textContent;
         const bancoEmisor = row.cells[6].textContent;
-        const taza = row.cells[7].textContent;
+        const torre = row.cells[7].textContent;
+        const apart = row.cells[8].textContent;
         
         // Configurar el título de la factura
         doc.setFontSize(20);
@@ -64,8 +65,12 @@ document.querySelectorAll('.generar_factura').forEach(button => {
         doc.text(bancoEmisor, 70, y);
         y += lineHeight;
         
-        doc.text('Taza del Día:', leftMargin, y);
-        doc.text(taza, 70, y);
+        doc.text('Torre:', leftMargin, y);
+        doc.text(torre, 70, y);
+        y += lineHeight;
+        
+        doc.text('Apartamento:', leftMargin, y);
+        doc.text(apart, 70, y);
         y += lineHeight;
         
         // Agregar un pie de página

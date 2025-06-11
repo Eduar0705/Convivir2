@@ -15,23 +15,29 @@ app.use(session({
     saveUninitialized: false
 }));
 
-//RUTAS DINAMICAS Y ESTATICAS
+//RUTAS ESTATICAS
 app.use(express.static('public'));
-app.use(require('./rutas/login'));
-app.use(require('./rutas/regUsuario'));
-app.use(require('./rutas/regUsuario_admin'));
-app.use(require('./rutas/codLogin'));
-app.use(require('./rutas/admin'));
-app.use(require('./rutas/avisos'));
-app.use(require('./rutas/user_admin'));
-app.use(require('./rutas/pagos'));
-const deleteUser = require('./rutas/delete_user');
-app.use('/', deleteUser);
+
+//RUTAS DE ADMIN
+app.use(require('./routes/login'));
+app.use(require('./routes/regUsuario'));
+app.use(require('./routes/regUsuario_admin'));
+app.use(require('./routes/codLogin'));
+app.use(require('./routes/admin'));
+app.use(require('./routes/avisos'));
+app.use(require('./routes/user_admin'));
+app.use(require('./routes/pagos'));
+
+//ELIMINAR USUARIO
+app.use(require('./routes/delete_user'));
+
+//ELIMINAR PAGO
+app.use(require('./routes/delete_pago'));
 
 //RUTAS USUARIOS
-app.use(require('./rutas/users'));
-app.use(require('./rutas/aggPagos'));
-app.use(require('./rutas/avisosUsuario'));
+app.use(require('./routes/users'));
+app.use(require('./routes/aggPagos'));
+app.use(require('./routes/avisosUsuario'));
 
 //PUERTO DEL SERVIDOR
 const PORT = process.env.PORT || 3000;

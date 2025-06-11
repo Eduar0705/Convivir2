@@ -4,13 +4,13 @@ const conexion = require('../config/conexion');
 const link = require('../config/link');
 
 router.post('/aggPagos', (req, res) => {
-    const { referencia, monto, tipoPago, fecha, nombre, cedula, banco } = req.body;
+    const { referencia, monto, tipoPago, fecha, nombre, cedula, banco, torre, apart } = req.body;
 
     const insertar = `
-        INSERT INTO pagos(num_referencia, monto_pago, tipo_pago, fecha_pago, nombre_p, cedula, bancoEmisor) 
-        VALUES (?, ?, ?, ?, ?, ?, ?);`;
+        INSERT INTO pagos(num_referencia, monto_pago, tipo_pago, fecha_pago, nombre_p, cedula, bancoEmisor, Torre, apartamento) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    const valores = [referencia, monto, tipoPago, fecha, nombre, cedula, banco];
+    const valores = [referencia, monto, tipoPago, fecha, nombre, cedula, banco, torre, apart];
 
     conexion.query(insertar, valores, (err, resul) => {
         if (err) {

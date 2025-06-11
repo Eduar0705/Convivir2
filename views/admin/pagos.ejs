@@ -142,6 +142,16 @@
                             <input type="date" id="hasta-input">
                         </div>
                         <div class="filter-group">
+                            <label>Torre</label>
+                            <select name="edi" id="edi">
+                                <option value="">Selecione un opcion</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
                             <button class="btn-buscar" id="filtrar-btn"><i class="fas fa-search"></i>Filtrar</button>
                             <button class="btn-limpiar" id="limpiar-btn"><i class="fas fa-eraser"></i> Limpiar</button>
                         </div>
@@ -171,6 +181,8 @@
                                 <th>Monto</th>
                                 <th>Método</th>
                                 <th>Banco Emisor</th>
+                                <th>Torre</th>
+                                <th>Apartamento</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -185,13 +197,17 @@
                                     <th><%= pago.monto_pago %></th>
                                     <th><%= pago.tipo_pago %></th>
                                     <th><%= pago.bancoEmisor %></th>
+                                    <th><%= pago.Torre %></th>
+                                    <th><%= pago.apartamento%></th>
                                     <td>
                                     <div class="actions-cell">
                                         <button class="btn-secondary generar_factura" title="Factura">
                                             <i class="fas fa-file-invoice"></i>
                                         </button>
-                                        <button class="btn-secondary" title="Eliminar" id="eliminar_factura">
-                                            <i class="fas fa-trash"></i>
+                                        <button class="btn-secondary dele_Pago" title="Eliminar">
+                                            <a href="#" 
+                                                class="fa fa-trash" title="Eliminar" onclick="eliminarPago('<%= pago.id_pago %>'); return false;">
+                                            </a>
                                         </button>
                                     </div>
                                 </td>
@@ -210,6 +226,7 @@
     </div>
     <script src="../js/script.js"></script>
     <script src="../js/pagos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="../js/facturaCreate.js"></script>
     <script>
@@ -226,6 +243,22 @@
             }
             document.getElementById('total-usd').textContent = totalUSD + ' $';
         });
+        function eliminarPago(id_pago){
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/eliminarPago/' + id_pago;
+                }
+            });
+        }
     </script>
 </body>
 </html>

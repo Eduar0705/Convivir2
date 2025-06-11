@@ -30,7 +30,7 @@ document.getElementById('export-excel').addEventListener('click', function () {
             <meta charset="UTF-8">
             <style>
                 .logo-header { text-align:center; margin-bottom:20px; }
-                .logo-header img { height:60px; }
+                .logo-header img { height:100px; }
                 .title { text-align:center; font-size:22px; font-weight:bold; margin-bottom:10px; }
                 table { border-collapse:collapse; width:100%; }
                 th, td { border:1px solid #ccc; padding:8px; text-align:center; }
@@ -60,7 +60,7 @@ document.getElementById('export-pdf').addEventListener('click', function () {
     let tableHTML = getCleanTableHTML();
     let printContents = `
         <div class="logo-header" style="text-align:center; margin-bottom:20px;">
-            <img src="${logoUrl}" alt="Logo" style="height:60px;">
+            <img src="${logoUrl}" alt="Logo" style="height:200px;">
         </div>
         <div class="title" style="text-align:center; font-size:22px; font-weight:bold; margin-bottom:10px;">
             Historial de Pagos

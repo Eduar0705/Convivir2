@@ -1,10 +1,10 @@
 const conectar = require("mysql");
 
 const conexion = conectar.createConnection({
-    host: "localhost",
-    database: "convivir",
-    user: "root",
-    password: ""
+    host: "mysql-convivir.alwaysdata.net",
+    database: "convivir_bd",
+    user: "convivir",
+    password: "31466704"
 });
 
 conexion.connect(function(err){

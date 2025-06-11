@@ -211,6 +211,11 @@
     transition: var(--transition);
 }
 
+.dele_Pago a{
+    text-decoration: none;
+    color: white;
+}
+
 .btn-secondary:hover {
     background: #7f8c8d;
     transform: translateY(-1px);
