@@ -196,32 +196,32 @@ document.addEventListener('DOMContentLoaded', function() {
         filtrarTabla();
     });
     document.getElementById('aceptar-precio').addEventListener('click', function() {
-            const precio = document.getElementById('precio-dolar').value;
-            document.getElementById('mostrar-precio').textContent = precio ? `Precio actual: ${precio} BS` : '';
-        });
-        document.getElementById('aceptar-precio').addEventListener('click', function() {
-            const precio = parseFloat(document.getElementById('precio-dolar').value);
-            const totalPagos = '<%= totalPagos %>';
-            let totalUSD = 0;
-            if (precio > 0) {
-                totalUSD = (totalPagos / precio).toFixed(2);
-            }
-            document.getElementById('total-usd').textContent = totalUSD + ' $';
-        });
-        function eliminarPago(id_pago){
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¡No podrás revertir esto!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/eliminarPago/' + id_pago;
-                }
-            });
+        const precio = document.getElementById('precio-dolar').value;
+        document.getElementById('mostrar-precio').textContent = precio ? `Precio actual: ${precio} BS` : '';
+    });
+    document.getElementById('aceptar-precio').addEventListener('click', function() {
+        const precio = parseFloat(document.getElementById('precio-dolar').value);
+        const totalPagos = '<%= totalPagos %>';
+        let totalUSD = 0;
+        if (precio > 0) {
+            totalUSD = (totalPagos / precio).toFixed(2);
         }
+        document.getElementById('total-usd').textContent = totalUSD + ' $';
+    });
+    function eliminarPago(id_pago){
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/eliminarPago/' + id_pago;
+            }
+        });
+    }
 });

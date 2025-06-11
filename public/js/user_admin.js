@@ -1,5 +1,14 @@
-document.getElementById('buscar_cedula').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
+// Formatear cédula mientras se escribe (para buscar)
+document.getElementById('buscar_cedula')?.addEventListener('input', function() {
+    let valor = this.value.toUpperCase().replace(/[^VEJG0-9]/gi, '');
+
+    if (valor.length > 1 && /^[VEJG]/.test(valor[0])) {
+        const letra = valor[0];
+        const numeros = valor.slice(1).replace(/[^0-9]/g, '').slice(0, 8);
+        this.value = `${letra}-${numeros}`;
+    } else {
+        this.value = valor;
+    }
 });
 
 // FUNCIONES DE BUSCAR Y LIMPIAR
@@ -9,34 +18,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnLimpiar = document.getElementById('btnLimpiarCedula');
     const tabla = document.querySelector('.crud table tbody');
 
-    // Crear mensaje de "no encontrado"
-    let mensajeNoEncontrado = document.createElement('tr');
-    mensajeNoEncontrado.innerHTML = `<td colspan="${tabla.parentElement.querySelectorAll('thead th').length}" style="text-align:center; color:red; font-size: 1.5em;">Cédula no encontrada</td>`;
-    mensajeNoEncontrado.style.display = 'none';
+    if (!tabla) return;
 
-    // Asegura que el mensaje solo se agregue una vez
-    if (!tabla.querySelector('.mensaje-no-encontrado')) {
+    // Crear mensaje de "no encontrado"
+    let mensajeNoEncontrado = tabla.querySelector('.mensaje-no-encontrado');
+    
+    if (!mensajeNoEncontrado) {
+        mensajeNoEncontrado = document.createElement('tr');
+        const colCount = tabla.parentElement.querySelectorAll('thead th').length;
+        mensajeNoEncontrado.innerHTML = `<td colspan="${colCount}" style="text-align:center; color:red; font-size: 1.5em;">Cédula no encontrada</td>`;
         mensajeNoEncontrado.classList.add('mensaje-no-encontrado');
+        mensajeNoEncontrado.style.display = 'none';
         tabla.appendChild(mensajeNoEncontrado);
     }
 
-    btnBuscar.addEventListener('click', function() {
-        const cedula = buscarInput.value.trim();
+    btnBuscar?.addEventListener('click', function() {
+        const cedula = buscarInput?.value.trim();
         let encontrado = false;
 
         if (!cedula) {
-            Array.from(tabla.rows).forEach(row => row.style.display = '');
+            Array.from(tabla.rows).forEach(row => {
+                if (!row.classList.contains('mensaje-no-encontrado')) {
+                    row.style.display = '';
+                }
+            });
             mensajeNoEncontrado.style.display = 'none';
             return;
         }
 
         Array.from(tabla.rows).forEach(row => {
+            if (row.classList.contains('mensaje-no-encontrado')) return;
+            
             // Busca la columna de cédula (índice 5)
             const celdaCedula = row.cells[5];
             if (celdaCedula && celdaCedula.textContent.includes(cedula)) {
                 row.style.display = '';
                 encontrado = true;
-            } else if (!row.classList.contains('mensaje-no-encontrado')) {
+            } else {
                 row.style.display = 'none';
             }
         });
@@ -44,50 +62,131 @@ document.addEventListener('DOMContentLoaded', function() {
         mensajeNoEncontrado.style.display = encontrado ? 'none' : '';
     });
 
-    btnLimpiar.addEventListener('click', function() {
-        buscarInput.value = '';
-        Array.from(tabla.rows).forEach(row => row.style.display = '');
+    btnLimpiar?.addEventListener('click', function() {
+        if (buscarInput) buscarInput.value = '';
+        Array.from(tabla.rows).forEach(row => {
+            if (!row.classList.contains('mensaje-no-encontrado')) {
+                row.style.display = '';
+            }
+        });
         mensajeNoEncontrado.style.display = 'none';
     });
 });
-// VERIFICA QUE TELEFONO SEA SOLO NUMEROS
-document.getElementById('telefono').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9+]/g, '').slice(0, 13);
+
+// VALIDACIÓN DE TELÉFONO VENEZOLANO (Formato: +58 414 1234567)
+document.getElementById('telefono')?.addEventListener('blur', function() {
+    const telefono = this.value.trim();
+    const regex = /^\+58\s?(?:412|414|416|424|426)\s?\d{7}$/;
+    
+    if (telefono && !regex.test(telefono)) {
+        Swal.fire({
+            title: 'Teléfono inválido',
+            html: 'El formato debe ser: <b>+58 414 1234567</b><br>' +
+                    'Prefijos válidos: 412, 414, 416, 424, 426',
+            icon: 'error',
+            confirmButtonColor: '#4361ee'
+        }).then(() => {
+            this.value = '';
+            this.focus();
+        });
+    }
 });
 
-// VERIFICA QUE CEDULA SEA SOLO NÚMEROS CON MÁXIMO 8 DÍGITOS Y MÍNIMO 7
-document.getElementById('cedula').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
+// FORMATO AUTOMÁTICO MIENTRAS ESCRIBE (opcional)
+document.getElementById('telefono')?.addEventListener('input', function() {
+    // Permite solo números y el signo +
+    this.value = this.value.replace(/[^0-9+]/g, '');
+    
+    // Auto-insertar +58 si empieza con 58
+    if (this.value.startsWith('58') && !this.value.startsWith('+58')) {
+        this.value = '+' + this.value;
+    }
+    
+    // Limitar longitud (3 código país + 3 prefijo + 7 número = 13 caracteres)
+    this.value = this.value.slice(0, 13);
+});
+
+// VERIFICAR CEDULA 
+document.getElementById('cedula')?.addEventListener('input', function() {
+    let valor = this.value.toUpperCase().replace(/[^VEJG0-9]/gi, '');
+
+    if (valor.length > 1 && /^[VEJG]/.test(valor[0])) {
+        const letra = valor[0];
+        const numeros = valor.slice(1).replace(/[^0-9]/g, '').slice(0, 8);
+        this.value = `${letra}-${numeros}`;
+    } else {
+        this.value = valor;
+    }
+});
+
+//VERIFICACION DE CORREO 
+let emailErrorShown = false;
+document.getElementById('email')?.addEventListener('blur', function() {
+    const email = this.value.trim();
+    
+    if (!email || emailErrorShown) return;
+    
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    
+    if (!emailPattern.test(email)) {
+        emailErrorShown = true; 
+        Swal.fire({
+            title: 'Error: Correo no válido',
+            text: 'Por favor ingrese un correo electrónico válido',
+            icon: 'error',
+            confirmButtonColor: '#4361ee'
+        }).then(() => {
+            this.value = '';
+            this.focus();
+        });
+    }
+});
+// Resetear la bandera cuando el usuario modifica el email
+document.getElementById('email')?.addEventListener('input', function() {
+    emailErrorShown = false;
 });
 
 // VERIFICA QUE EN NOMBRE Y APELLIDO SOLO HAYA LETRAS (incluyendo acentos y ñ)
-document.getElementById('name').addEventListener('input', function() {
+document.getElementById('name')?.addEventListener('input', function() {
     this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').slice(0, 50);
 });
 
 // VERIFICA QUE EN USUARIO SOLO HAYA LETRAS Y NÚMEROS
-document.getElementById('user').addEventListener('input', function() {
+document.getElementById('user')?.addEventListener('input', function() {
     this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').slice(0, 20);
 });
-// Verificación que los campos no estén vacíos del formulario con alertas modernas
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    const name = document.getElementById('name').value.trim();
-    const user = document.getElementById('user').value.trim();
-    const pass = document.getElementById('pass').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const cedula = document.getElementById('cedula').value.trim();
 
-    if (!name || !user || !pass || !email || !telefono || !cedula) {
+// Verificación que los campos no estén vacíos del formulario con alertas modernas
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+    const name = document.getElementById('name')?.value.trim();
+    const user = document.getElementById('user')?.value.trim();
+    const pass = document.getElementById('pass')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
+    const telefono = document.getElementById('telefono')?.value.trim();
+    const cedula = document.getElementById('cedula')?.value.trim();
+
+    let error = '';
+    
+    if (!name) error = 'El nombre es obligatorio';
+    else if (!user) error = 'El usuario es obligatorio';
+    else if (!pass) error = 'La contraseña es obligatoria';
+    else if (!email) error = 'El email es obligatorio';
+    else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email)) error = 'El email no es válido';
+    else if (!telefono) error = 'El teléfono es obligatorio';
+    else if (!cedula) error = 'La cédula es obligatoria';
+    else if (!/^[VEJG]-?\d{1,8}$/i.test(cedula)) error = 'La cédula no es válida';
+
+    if (error) {
         e.preventDefault();
         Swal.fire({
             icon: 'warning',
-            title: 'Campos incompletos',
-            text: 'Por favor, complete todos los campos obligatorios.',
+            title: 'Error en el formulario',
+            text: error,
             confirmButtonText: 'Aceptar'
         });
     }
 });
+
 function eliminarUsuario(id) {
     Swal.fire({
         title: '¿Estás seguro?',
