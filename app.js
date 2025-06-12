@@ -27,6 +27,7 @@ app.use(require('./routes/admin'));
 app.use(require('./routes/avisos'));
 app.use(require('./routes/user_admin'));
 app.use(require('./routes/pagos'));
+app.use(require('./routes/estadisticas'));
 
 //ELIMINAR USUARIO
 app.use(require('./routes/delete_user'));

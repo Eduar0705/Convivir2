@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./estadisticas.html">
+                        <a href="/admin/estadisticas">
                             <i class="fas fa-chart-bar"></i>
                             <span>Estadísticas</span>
                         </a>
@@ -99,10 +99,12 @@
                         pagos.forEach(function(pago) {
                             totalPagos += Number(pago.monto_pago) || 0;
                         });
+                        // Formatear el totalPagos con separación de miles y decimales
+                        let PagosT = totalPagos.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                     %>
                     <div class="summary-card total">
                         <div class="summary-title">Monto Total Bs</div>
-                        <div class="summary-amount"><%= totalPagos %>BS</div>
+                        <div class="summary-amount"><%= PagosT %>Bs</div>
                     </div>
                     <div class="summary-card pending">
                         <div class="summary-title">Precio del dolar</div>
@@ -145,10 +147,10 @@
                             <label>Torre</label>
                             <select name="edi" id="edi">
                                 <option value="">Seleccione una opción</option>
-                                <option value="Torre A">Torre A</option>
-                                <option value="Torre B">Torre B</option>
-                                <option value="Torre C">Torre C</option>
-                                <option value="Torre D">Torre D</option>
+                                <option value="A">Torre A</option>
+                                <option value="B">Torre B</option>
+                                <option value="C">Torre C</option>
+                                <option value="D">Torre D</option>
                             </select>
                         </div>
                         <div class="filter-group">
@@ -215,7 +217,7 @@
                                 <% }); %>
                             <% } else { %>
                                 <tr>
-                                    <td colspan="10">No hay avisos registrados.</td>
+                                    <td colspan="10">No hay pagoss registrados.</td>
                                 </tr>
                             <% } %>
                         </tbody>
@@ -229,5 +231,28 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="../js/facturaCreate.js"></script>
+    <script>
+        document.getElementById('aceptar-precio').addEventListener('click', function() {
+            const precioDolar = parseFloat(document.getElementById('precio-dolar').value);
+            const totalBs = '<%= totalPagos %>';
+
+            if (precioDolar > 0) {
+                const totalUsd = totalBs / precioDolar;
+                const totalUsdFormatted = totalUsd.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                document.getElementById('total-usd').textContent = totalUsdFormatted + ' $';
+                document.getElementById('mostrar-precio').textContent = 'Precio actual: ' + precioDolar.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs/$';
+            } else {
+                alert('Por favor ingrese un precio del dólar válido');
+            }
+        });
+
+        // Opcional: Permitir calcular al presionar Enter en el input
+        document.getElementById('precio-dolar').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('aceptar-precio').click();
+            }
+        });
+    </script>
 </body>
 </html>

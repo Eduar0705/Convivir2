@@ -8,12 +8,18 @@ function getFormattedDate() {
 
 // Function to generate clean table HTML
 function getCleanTableHTML() {
-    let table = document.querySelector('.payments-table');
-    let clone = table.cloneNode(true);
+    const table = document.querySelector('.payments-table');
+    if (!table) {
+        console.error('No se encontró la tabla de pagos');
+        return '';
+    }
+
+    const clone = table.cloneNode(true);
 
     // Remove "Actions" column
-    clone.querySelectorAll('thead tr').forEach(tr => tr.deleteCell(-1));
-    clone.querySelectorAll('tbody tr').forEach(tr => tr.deleteCell(-1));
+    clone.querySelectorAll('thead tr, tbody tr').forEach(tr => {
+        if (tr.cells.length > 0) tr.deleteCell(-1);
+    });
 
     // Apply inline styles for table
     clone.style.borderCollapse = "collapse";
@@ -32,73 +38,98 @@ function getCleanTableHTML() {
 }
 
 // Export to Excel
-document.getElementById('export-excel').addEventListener('click', function () {
-    let tableHTML = getCleanTableHTML();
-    let html = `
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                .logo-header { text-align:center; margin-bottom:20px; }
-                .logo-header img { height:80px; width:auto; max-width:200px; }
-                .title { text-align:center; font-size:20px; font-weight:bold; margin-bottom:10px; }
-                .date { text-align:center; font-size:16px; margin-bottom:20px; }
-                table { border-collapse:collapse; width:100%; margin:0 auto; }
-                th, td { border:1px solid #ccc; padding:10px; text-align:center; font-size:14px; }
-                th { background:#f2f2f2; font-weight:bold; }
-            </style>
-        </head>
-        <body>
-            <div class="logo-header">
-                <img src="${logoUrl}" alt="Logo">
-            </div>
-            <div class="title">Historial de Pagos</div>
-            <div class="date">Fecha de emisión: ${getFormattedDate()}</div>
-            ${tableHTML}
-        </body>
-        </html>
-    `;
-    let blob = new Blob([html], {type: 'application/vnd.ms-excel'});
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Registro_de_pagos_${getFormattedDate().replace(/\//g, '-')}.xls`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-});
+function setupExcelExport() {
+    const excelBtn = document.getElementById('export-excel');
+    if (!excelBtn) return;
+
+    excelBtn.addEventListener('click', function() {
+        const tableHTML = getCleanTableHTML();
+        if (!tableHTML) {
+            alert('No hay datos para exportar');
+            return;
+        }
+
+        const html = `
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    .logo-header { text-align:center; margin-bottom:20px; }
+                    .logo-header img { height:80px; width:auto; max-width:200px; }
+                    .title { text-align:center; font-size:20px; font-weight:bold; margin-bottom:10px; }
+                    .date { text-align:center; font-size:16px; margin-bottom:20px; }
+                    table { border-collapse:collapse; width:100%; margin:0 auto; }
+                    th, td { border:1px solid #ccc; padding:10px; text-align:center; font-size:14px; }
+                    th { background:#f2f2f2; font-weight:bold; }
+                </style>
+            </head>
+            <body>
+                <div class="logo-header">
+                    <img src="${logoUrl}" alt="Logo">
+                </div>
+                <div class="title">Historial de Pagos</div>
+                <div class="date">Fecha de emisión: ${getFormattedDate()}</div>
+                ${tableHTML}
+            </body>
+            </html>
+        `;
+        
+        const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `Registro_de_pagos_${getFormattedDate().replace(/\//g, '-')}.xls`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
+}
 
 // Export to PDF
-document.getElementById('export-pdf').addEventListener('click', function () {
-    let tableHTML = getCleanTableHTML();
-    let printContents = `
-        <div class="logo-header" style="text-align:center; margin-bottom:20px;">
-            <img src="${logoUrl}" alt="Logo" style="height:100px; width:auto; max-width:250px;">
-        </div>
-        <div class="title" style="text-align:center; font-size:24px; font-weight:bold; margin-bottom:10px;">
-            Historial de Pagos
-        </div>
-        <div class="date" style="text-align:center; font-size:16px; margin-bottom:20px;">
-            Fecha de emisión: ${getFormattedDate()}
-        </div>
-        ${tableHTML}
-    `;
-    let win = window.open('', '', 'height=700,width=900');
-    win.document.write('<html><head><title>Pagos PDF</title>');
-    win.document.write('<style>');
-    win.document.write('table { border-collapse:collapse; width:100%; margin:0 auto; }');
-    win.document.write('th, td { border:1px solid #ccc; padding:10px; text-align:center; font-size:14px; }');
-    win.document.write('th { background:#f2f2f2; font-weight:bold; }');
-    win.document.write('@media print { body { margin: 20mm; } }');
-    win.document.write('</style>');
-    win.document.write('</head><body>');
-    win.document.write(printContents);
-    win.document.write('</body></html>');
-    win.document.close();
-    setTimeout(() => win.print(), 500);
-});
+function setupPDFExport() {
+    const pdfBtn = document.getElementById('export-pdf');
+    if (!pdfBtn) return;
 
-// Search and Clear Buttons
-document.addEventListener('DOMContentLoaded', function() {
+    pdfBtn.addEventListener('click', function() {
+        const tableHTML = getCleanTableHTML();
+        if (!tableHTML) {
+            alert('No hay datos para exportar');
+            return;
+        }
+
+        const printContents = `
+            <div class="logo-header" style="text-align:center; margin-bottom:20px;">
+                <img src="${logoUrl}" alt="Logo" style="height:100px; width:auto; max-width:250px;">
+            </div>
+            <div class="title" style="text-align:center; font-size:24px; font-weight:bold; margin-bottom:10px;">
+                Historial de Pagos
+            </div>
+            <div class="date" style="text-align:center; font-size:16px; margin-bottom:20px;">
+                Fecha de emisión: ${getFormattedDate()}
+            </div>
+            ${tableHTML}
+        `;
+        
+        const win = window.open('', '', 'height=700,width=900');
+        win.document.write('<html><head><title>Pagos PDF</title>');
+        win.document.write('<style>');
+        win.document.write('table { border-collapse:collapse; width:100%; margin:0 auto; }');
+        win.document.write('th, td { border:1px solid #ccc; padding:10px; text-align:center; font-size:14px; }');
+        win.document.write('th { background:#f2f2f2; font-weight:bold; }');
+        win.document.write('@media print { body { margin: 20mm; } }');
+        win.document.write('</style>');
+        win.document.write('</head><body>');
+        win.document.write(printContents);
+        win.document.write('</body></html>');
+        win.document.close();
+        setTimeout(() => {
+            win.print();
+            win.close();
+        }, 500);
+    });
+}
+
+// Filter functionality
+function setupFilters() {
     const searchInput = document.getElementById('search-input');
     const metodoSelect = document.getElementById('metodo-select');
     const desdeInput = document.getElementById('desde-input');
@@ -108,107 +139,111 @@ document.addEventListener('DOMContentLoaded', function() {
     const limpiarBtn = document.getElementById('limpiar-btn');
     const table = document.querySelector('.payments-table tbody');
 
+    if (!table || !filtrarBtn) return;
+
     // Set max date for hastaInput to today
     const today = new Date().toISOString().split('T')[0];
-    hastaInput.setAttribute('max', today);
+    if (hastaInput) hastaInput.setAttribute('max', today);
 
-    function filtrarTabla() {
-        const search = searchInput.value.trim().toLowerCase();
-        const metodo = metodoSelect.value;
-        const desde = desdeInput.value;
-        const hasta = hastaInput.value;
-        const torre = torreSelect.value;
+    function filterTable() {
+        const search = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        const metodo = metodoSelect ? metodoSelect.value : '';
+        const desde = desdeInput ? desdeInput.value : '';
+        const hasta = hastaInput ? hastaInput.value : '';
+        const torre = torreSelect ? torreSelect.value : '';
         const currentDate = new Date();
 
         // Validate date range
         if (hasta && new Date(hasta) > currentDate) {
             alert('La fecha "Hasta" no puede ser mayor a la fecha actual');
-            hastaInput.value = today;
+            if (hastaInput) hastaInput.value = today;
             return;
         }
 
-        // Debug: Log tower values to check what's being compared
-        console.log('Selected torre:', torre);
-        const torreValues = new Set();
         Array.from(table.rows).forEach(row => {
-            if (row.cells.length >= 6) {
-                const rowTorre = row.cells[4].textContent.trim();
-                torreValues.add(rowTorre);
+            // Skip "No records" row or rows with insufficient cells
+            if (row.cells.length < 6) {
+                row.style.display = 'none';
+                return;
             }
-        });
-        console.log('Unique torre values in table:', Array.from(torreValues));
-
-        Array.from(table.rows).forEach(row => {
-            // Skip "No records" row
-            if (row.cells.length < 6) return;
 
             const referencia = row.cells[0].textContent.toLowerCase();
             const monto = row.cells[1].textContent.toLowerCase();
             const cedula = row.cells[2].textContent.toLowerCase();
             const fecha = row.cells[3].textContent;
-            const rowTorre = row.cells[4].textContent.trim();
-            const metodoPago = row.cells[5].textContent;
+            const rowTorre = row.cells[4].textContent.trim().toLowerCase();
+            const metodoPago = row.cells[5].textContent.toLowerCase();
 
-            let matchesSearch = true;
-            let matchesMetodo = true;
-            let matchesFecha = true;
-            let matchesTorre = true;
+            let matchesSearch = !search;
+            let matchesMetodo = !metodo;
+            let matchesFecha = !desde && !hasta;
+            let matchesTorre = !torre;
 
-            // Numeric search (reference, ID, amount)
+            // Search filter (reference, ID, amount)
             if (search) {
                 matchesSearch = referencia.includes(search) || cedula.includes(search) || monto.includes(search);
             }
 
             // Payment method filter
             if (metodo) {
-                matchesMetodo = metodoPago === metodo;
+                matchesMetodo = metodoPago === metodo.toLowerCase();
             }
 
             // Date range filter
             if (desde || hasta) {
-                const rowDate = new Date(fecha.split('/').reverse().join('-'));
-                if (desde && rowDate < new Date(desde)) {
-                    matchesFecha = false;
-                }
-                if (hasta && rowDate > new Date(hasta)) {
-                    matchesFecha = false;
+                const rowDateParts = fecha.split('/');
+                if (rowDateParts.length === 3) {
+                    const rowDate = new Date(`${rowDateParts[2]}-${rowDateParts[1]}-${rowDateParts[0]}`);
+                    
+                    if (desde) {
+                        const desdeDate = new Date(desde);
+                        matchesFecha = rowDate >= desdeDate;
+                    }
+                    
+                    if (hasta && matchesFecha) {
+                        const hastaDate = new Date(hasta);
+                        matchesFecha = rowDate <= hastaDate;
+                    }
                 }
             }
 
-            // Tower filter (case-insensitive, trim whitespace)
+            // Tower filter
             if (torre) {
-                matchesTorre = rowTorre.toLowerCase() === torre.toLowerCase() || rowTorre.toLowerCase().includes(`torre ${torre.toLowerCase()}`);
+                const torreLower = torre.toLowerCase();
+                matchesTorre = rowTorre === torreLower || rowTorre.includes(`torre ${torreLower}`);
             }
 
             // Show row only if all active filters match
             row.style.display = (matchesSearch && matchesMetodo && matchesFecha && matchesTorre) ? '' : 'none';
         });
+
+        // Check if all rows are hidden
+        const visibleRows = Array.from(table.rows).some(row => row.style.display !== 'none');
+        if (!visibleRows) {
+            const noResultsRow = document.createElement('tr');
+            noResultsRow.innerHTML = '<td colspan="6" style="text-align:center;"><h1>No se encontraron resultados</h1></td>';
+            noResultsRow.id = 'no-results-row';
+            table.appendChild(noResultsRow);
+        } else {
+            const noResultsRow = document.getElementById('no-results-row');
+            if (noResultsRow) noResultsRow.remove();
+        }
     }
 
-    filtrarBtn.addEventListener('click', filtrarTabla);
+    if (filtrarBtn) filtrarBtn.addEventListener('click', filterTable);
+    if (limpiarBtn) limpiarBtn.addEventListener('click', function() {
+        if (searchInput) searchInput.value = '';
+        if (metodoSelect) metodoSelect.value = '';
+        if (desdeInput) desdeInput.value = '';
+        if (hastaInput) hastaInput.value = '';
+        if (torreSelect) torreSelect.value = '';
+        filterTable();
+    });
+}
 
-    limpiarBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        metodoSelect.value = '';
-        desdeInput.value = '';
-        hastaInput.value = '';
-        torreSelect.value = '';
-        filtrarTabla();
-    });
-    document.getElementById('aceptar-precio').addEventListener('click', function() {
-        const precio = document.getElementById('precio-dolar').value;
-        document.getElementById('mostrar-precio').textContent = precio ? `Precio actual: ${precio} BS` : '';
-    });
-    document.getElementById('aceptar-precio').addEventListener('click', function() {
-        const precio = parseFloat(document.getElementById('precio-dolar').value);
-        const totalPagos = '<%= totalPagos %>';
-        let totalUSD = 0;
-        if (precio > 0) {
-            totalUSD = (totalPagos / precio).toFixed(2);
-        }
-        document.getElementById('total-usd').textContent = totalUSD + ' $';
-    });
-    function eliminarPago(id_pago){
+// Delete payment functionality
+function setupDeletePayment() {
+    window.eliminarPago = function(id_pago) {
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
@@ -224,4 +259,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+}
+
+// Initialize all functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupExcelExport();
+    setupPDFExport();
+    setupFilters();
+    setupDollarPrice();
+    setupDeletePayment();
 });
+

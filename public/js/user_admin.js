@@ -91,7 +91,6 @@ document.getElementById('telefono')?.addEventListener('blur', function() {
         });
     }
 });
-
 // FORMATO AUTOMÁTICO MIENTRAS ESCRIBE (opcional)
 document.getElementById('telefono')?.addEventListener('input', function() {
     // Permite solo números y el signo +
@@ -106,13 +105,14 @@ document.getElementById('telefono')?.addEventListener('input', function() {
     this.value = this.value.slice(0, 13);
 });
 
+
 // VERIFICAR CEDULA 
 document.getElementById('cedula')?.addEventListener('input', function() {
     let valor = this.value.toUpperCase().replace(/[^VEJG0-9]/gi, '');
 
     if (valor.length > 1 && /^[VEJG]/.test(valor[0])) {
         const letra = valor[0];
-        const numeros = valor.slice(1).replace(/[^0-9]/g, '').slice(0, 8);
+        const numeros = valor.slice(1).replace(/[^0-9]/g, '').slice(0, 9);
         this.value = `${letra}-${numeros}`;
     } else {
         this.value = valor;
@@ -141,12 +141,12 @@ document.getElementById('email')?.addEventListener('blur', function() {
         });
     }
 });
-// Resetear la bandera cuando el usuario modifica el email
 document.getElementById('email')?.addEventListener('input', function() {
     emailErrorShown = false;
 });
 
-// VERIFICA QUE EN NOMBRE Y APELLIDO SOLO HAYA LETRAS (incluyendo acentos y ñ)
+
+// VERIFICA QUE EN NOMBRE Y APELLIDO SEAN SOLO LETRAS
 document.getElementById('name')?.addEventListener('input', function() {
     this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').slice(0, 50);
 });

@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./estadisticas.html">
+                        <a href="/admin/estadisticas">
                             <i class="fas fa-chart-bar"></i>
                             <span>Estadísticas</span>
                         </a>
@@ -105,24 +105,22 @@
                             <div class="kpi-value">00</div>
                         </div>
 
-                        <div class="kpi-card apartments">
-                            <div class="kpi-header">
-                                <span class="kpi-title">Apartamentos Ocupados</span>
-                                <div class="kpi-icon">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                            </div>
-                            <div class="kpi-value">00</div>
-                        </div>
-
+                        <%
+                            let totalPagos = 0;
+                            results.forEach(function(pago) {
+                                totalPagos += Number(pago.monto_pago) || 0;
+                            });
+                            // Formatear el totalPagos con separación de miles y decimales
+                            let PagosT = totalPagos.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        %>
                         <div class="kpi-card payments">
-                            <div class="kpi-header">
+                        <div class="kpi-header">
                                 <span class="kpi-title">Pagos Recibidos</span>
                                 <div class="kpi-icon">
                                     <i class="fas fa-money-bill-wave"></i>
                                 </div>
                             </div>
-                            <div class="kpi-value">100$</div>
+                            <div class="kpi-value"><%= PagosT %> Bs</div>
                         </div>
                     </section>
 
