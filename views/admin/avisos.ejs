@@ -110,10 +110,9 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Cedula</th>
-                                <th>Aviso</th>
                                 <th>Edificio</th>
                                 <th>Apartamento</th>
-
+                                <th>Aviso</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,9 +121,9 @@
                                     <tr>
                                         <td><%= aviso.nombre_apellido %></td>
                                         <td><%= aviso.cedula %></td>
-                                        <td><button class="btn generar-aviso" data-nombre="<%= aviso.nombre_apellido %>" data-telefono="<%= aviso.telefono %>">Generar Aviso</button></td>
                                         <td><i class="fa fa-building"></i> <%= aviso.edificio %></td>
                                         <td><i class="fa fa-home"></i> <%= aviso.apartamento %></td>
+                                        <td><button class="btn generar-aviso" data-nombre="<%= aviso.nombre_apellido %>" data-telefono="<%= aviso.telefono %>">Generar Aviso</button></td>
                                     </tr>
                                 <% }); %>
                             <% } else { %>

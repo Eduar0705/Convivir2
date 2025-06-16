@@ -1,80 +1,59 @@
-/* ===== BASE STYLES ===== */
-:root {
-    --primary-color: #3498db;
-    --primary-dark: #2c3e50;
-    --success-color: #2ecc71;
-    --success-dark: #1e8c4c;
-    --danger-color: #e74c3c;
-    --danger-dark: #aa3325;
-    --text-color: #333;
-    --light-gray: #f8f9fa;
-    --border-color: #ddd;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.212);
-    --transition: all 0.3s ease;
-}
-
-/* ===== LAYOUT STYLES ===== */
-.layout {
-    display: flex;
-    min-height: 100vh;
-}
-
-.main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #f5f7fa;
-}
-
-.content {
-    flex: 1;
-    padding: 20px;
-}
-
 /* ===== CARD PANEL STYLES ===== */
 .tarjetas-panel {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
 }
 
 .tarjeta {
-    background: white;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
+    background: linear-gradient(145deg, #ffffff, #f1f5f9);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.06);
+    padding: 30px;
     display: flex;
-    flex: 1 1 320px;
-    min-width: 300px;
-    max-width: 70%;
-    padding: 24px 20px;
     align-items: center;
-    transition: var(--transition);
-    gap: 18px;
-    margin: 0 auto;
-    height: auto;
-    box-sizing: border-box;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.tarjeta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 20px 20px 0 0;
 }
 
 .tarjeta:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .icono-tarjeta {
-    width: 100px;
-    height: 100px;
-    padding: 0;
-    border-radius: 50%;
-    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.18);
-    border: 3px solid #fff;
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.tarjeta:hover .icono-tarjeta {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: rotate(5deg) scale(1.1);
 }
 
 .info-tarjeta {
@@ -82,258 +61,380 @@
 }
 
 .info-tarjeta h3 {
-    color: var(--primary-dark);
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
 }
 
 .info-tarjeta p {
-    font-size: 3rem;
-    font-weight: bold;
-    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
 }
 
 /* ===== FORM STYLES ===== */
 .info-tarjeta input[type="text"] {
-    width: 60%;
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
     font-size: 1rem;
-    margin: 10px 0;
+    margin: 12px 0;
     outline: none;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #2d3748;
 }
 
 .info-tarjeta input[type="text"]:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
 }
 
 .info-tarjeta button,
 #btnAgregarUsuario {
-    padding: 12px 20px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    transition: var(--transition);
-    margin-right: 10px;
-    margin-top: 5px;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-right: 12px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
 }
 
 #btnBuscarCedula,
 #btnAgregarUsuario {
-    background-color: var(--success-color);
+    background: linear-gradient(135deg, #10b981, #059669);
     color: white;
-    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
 }
 
 #btnBuscarCedula:hover,
 #btnAgregarUsuario:hover {
-    background-color: var(--success-dark);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
 }
 
 #btnLimpiarCedula {
-    background-color: var(--danger-color);
+    background: linear-gradient(135deg, #ef4444, #dc2626);
     color: white;
-    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
 }
 
 #btnLimpiarCedula:hover {
-    background-color: var(--danger-dark);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
 /* ===== CRUD TABLE STYLES ===== */
 .crud {
     width: 100%;
+    margin: 30px 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    background: #ffffff;
     overflow-x: auto;
-    margin: 20px 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .crud table {
     width: 100%;
+    min-width: 1200px;
     border-collapse: collapse;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: inherit;
 }
 
 .crud thead {
-    background-color: var(--primary-dark);
+    background: linear-gradient(135deg, #2d3748, #4a5568);
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .crud th {
-    padding: 15px;
+    padding: 16px 12px;
     text-align: left;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9em;
-    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    min-width: 100px;
 }
 
+.crud th:first-child { min-width: 80px; }
+.crud th:nth-child(2) { min-width: 120px; }
+.crud th:nth-child(3) { min-width: 200px; }
+.crud th:nth-child(4) { min-width: 120px; }
+.crud th:nth-child(5) { min-width: 100px; }
+.crud th:nth-child(6) { min-width: 100px; }
+.crud th:nth-child(7) { min-width: 120px; }
+.crud th:nth-child(8) { min-width: 140px; }
+.crud th:last-child { min-width: 120px; }
+
 .crud tbody tr {
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition);
+    border-bottom: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .crud tbody tr:nth-of-type(even) {
-    background-color: var(--light-gray);
-}
-
-.crud tbody tr:last-of-type {
-    border-bottom: 2px solid var(--primary-dark);
+    background: linear-gradient(145deg, #f8fafc, #f1f5f9);
 }
 
 .crud tbody tr:hover {
-    background-color: #e9f7fe;
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
 }
 
 .crud td {
-    padding: 12px 15px;
-    color: var(--text-color);
-    font-size: 0.95em;
+    padding: 14px 12px;
+    color: #374151;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.crud td:nth-child(3) {
+    max-width: 250px;
 }
 
 .crud td a {
     text-decoration: none;
-    color: #555;
-    margin: 0 5px;
-    transition: var(--transition);
-    font-size: 1.1em;
+    color: #6b7280;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crud td a.fa-edit {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
 }
 
 .crud td a.fa-edit:hover {
-    color: var(--primary-color);
+    color: #ffffff;
+    background: #667eea;
+    transform: scale(1.1);
+}
+
+.crud td a.fa-trash {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
 }
 
 .crud td a.fa-trash:hover {
-    color: var(--danger-color);
+    color: #ffffff;
+    background: #ef4444;
+    transform: scale(1.1);
 }
 
 .crud td:last-child {
     text-align: center;
-    min-width: 100px;
+    min-width: 120px;
+    white-space: normal;
 }
 
 .crud tbody tr td[colspan] {
     text-align: center;
-    padding: 20px;
-    color: #777;
+    padding: 40px;
+    color: #9ca3af;
     font-style: italic;
+    font-size: 1.1rem;
 }
 
-/* ===== FORM STYLES ===== */
+/* ===== FORM CONTAINER STYLES ===== */
 .agg {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    margin-top: 30px;
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.agg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 20px 20px 0 0;
 }
 
 .login-form {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: var(--primary-dark);
-    font-weight: 500;
-}
-input,select,#cargo {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: var(--transition);
-    outline: none;
+    margin-bottom: 10px;
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.025em;
 }
 
-input:focus,select:focus,#cargo:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+input, select, #cargo {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    background: #ffffff;
+    color: #2d3748;
+    font-family: inherit;
+}
+
+input:focus, select:focus, #cargo:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
 }
 
 .toggle-password {
-    background: none;
-    border: none;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border: 2px solid #e2e8f0;
     cursor: pointer;
     position: absolute;
     right: 15px;
     top: 42px;
-    color: #777;
+    color: #6b7280;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 0.3s ease;
 }
+
+.toggle-password:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: scale(1.1);
+}
+
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 1400px) {
-    .tarjeta {
-        max-width: 90%;
-        min-width: 260px;
+    .tarjetas-panel {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
     }
+    
     .crud {
-        font-size: 0.98em;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 1200px) {
-    .tarjeta {
-        max-width: 98%;
-        min-width: 220px;
-        padding: 18px 12px;
+    .content {
+        padding: 25px;
     }
+    
+    .tarjeta {
+        padding: 25px;
+    }
+    
     .icono-tarjeta {
         width: 70px;
         height: 70px;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
+    
+    .crud table {
+        min-width: 1000px;
+    }
+    
     .crud th,
     .crud td {
-        padding: 10px 10px;
-        font-size: 0.92em;
+        padding: 12px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .crud th {
+        min-width: 80px;
+    }
+    
+    .crud td {
+        max-width: 150px;
     }
 }
 
 @media (max-width: 1024px) {
     .tarjetas-panel {
-        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
     }
+    
     .tarjeta {
-        padding: 14px 8px;
-        max-width: 99%;
-        min-width: 180px;
+        padding: 20px;
     }
+    
     .icono-tarjeta {
-        width: 50px;
-        height: 50px;
-        font-size: 1rem;
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
     }
+    
+    .crud table {
+        min-width: 900px;
+    }
+    
     .crud th,
     .crud td {
-        padding: 8px 8px;
-        font-size: 0.88em;
+        padding: 10px 6px;
+        font-size: 0.75rem;
     }
-    .crud td a {
-        font-size: 1em;
+    
+    .crud th {
+        min-width: 70px;
     }
+    
+    .crud td {
+        max-width: 120px;
+    }
+    
     .agg {
-        padding: 15px;
+        padding: 25px;
     }
 }
 
@@ -341,165 +442,182 @@ input:focus,select:focus,#cargo:focus {
     .layout {
         flex-direction: column;
     }
+    
     .main-content {
-        padding: 0;
+        margin: 10px;
+        border-radius: 20px;
     }
+    
     .tarjetas-panel {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
+    
     .tarjeta {
-        width: 98%;
-        max-width: 420px;
-        min-width: 120px;
-        margin: 0 auto 15px auto;
         flex-direction: column;
-        align-items: center;
         text-align: center;
+        padding: 25px;
     }
-    .icono-tarjeta {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
+    
     .info-tarjeta button {
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 8px;
-    }
-    .agg {
-        margin-top: 18px;
+        margin: 5px 0;
     }
 }
 
 @media (max-width: 768px) {
     .content {
-        padding: 10px;
+        padding: 20px;
     }
-    .tarjetas-panel {
-        gap: 8px;
-    }
+    
     .tarjeta {
-        width: 99%;
-        max-width: 99%;
-        min-width: 0;
-        padding: 10px 4px;
+        padding: 20px;
     }
+    
     .icono-tarjeta {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9rem;
-        margin-bottom: 8px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
     }
+    
     .info-tarjeta h3 {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
+    
     .info-tarjeta p {
-        font-size: 3rem;
+        font-size: 2rem;
     }
-    .info-tarjeta input[type="text"] {
-        padding: 8px 8px;
-        font-size: 0.9rem;
-    }
-    .info-tarjeta button {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-    }
+    
     .crud {
-        border-radius: 6px;
-        font-size: 0.95em;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
+    
     .crud thead {
         display: none;
     }
+    
     .crud tbody tr {
         display: block;
-        margin-bottom: 12px;
-        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+        padding: 15px;
+        background: #ffffff;
     }
+    
     .crud td {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 6px;
-        text-align: right;
-        border-bottom: 1px dotted var(--border-color);
-        font-size: 0.95em;
+        padding: 12px 0;
+        border-bottom: 1px solid #f3f4f6;
     }
+    
     .crud td:before {
         content: attr(data-label);
-        font-weight: bold;
+        font-weight: 600;
+        color: #4a5568;
         text-transform: uppercase;
-        margin-right: auto;
-        padding-right: 10px;
-        text-align: left;
-        color: var(--primary-dark);
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
     }
+    
     .crud td:last-child {
         justify-content: center;
         border-bottom: none;
+        padding-top: 15px;
     }
+    
     .crud td:last-child:before {
         display: none;
     }
+    
     .agg {
-        padding: 10px;
+        padding: 20px;
+        margin-top: 25px;
     }
+    
     .login-form {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 15px;
     }
 }
 
 @media (max-width: 480px) {
     .content {
-        padding: 4px;
+        padding: 15px;
     }
+    
+    .main-content {
+        margin: 5px;
+        border-radius: 15px;
+    }
+    
     .tarjeta {
-        padding: 6px 2px;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
+        padding: 18px;
     }
+    
     .icono-tarjeta {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+        border-radius: 12px;
     }
+    
     .info-tarjeta h3 {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
+    
     .info-tarjeta p {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
+    
     .info-tarjeta input[type="text"] {
-        padding: 6px 6px;
-        font-size: 0.85rem;
+        padding: 12px 15px;
+        font-size: 0.9rem;
     }
+    
     .info-tarjeta button {
-        padding: 7px 8px;
+        padding: 12px 18px;
         font-size: 0.85rem;
     }
+    
     .crud {
-        box-shadow: none;
-        border: 1px solid var(--border-color);
-        font-size: 0.85em;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
     }
+    
+    .crud tbody tr {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
     .crud td {
-        padding: 4px 4px;
-        font-size: 0.78em;
+        padding: 8px 0;
+        font-size: 0.85rem;
     }
+    
     .crud td a {
-        font-size: 0.85em;
-        margin: 0 2px;
-    }
-    .agg {
+        font-size: 1rem;
         padding: 6px;
-        margin-top: 10px;
     }
+    
+    .agg {
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 15px;
+    }
+    
     .login-form {
-        grid-template-columns: 1fr;
-        gap: 6px;
+        gap: 12px;
+    }
+    
+    input, select, #cargo {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+        border-radius: 10px;
     }
 }
